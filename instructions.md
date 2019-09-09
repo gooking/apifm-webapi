@@ -29,15 +29,20 @@
   - [短信验证码](#短信验证码)
     - [获取验证码(发送短信)](#获取验证码发送短信)
     - [校验输入验证码是否正确](#校验输入验证码是否正确-1)
+  - [邮箱验证码](#邮箱验证码)
+    - [获取验证码(发送邮件)](#获取验证码发送邮件)
+    - [校验输入验证码是否正确](#校验输入验证码是否正确-2)
 - [登录 & 注册](#登录--注册)
   - [用户注册](#用户注册)
     - [小程序简单注册](#小程序简单注册)
     - [小程序详细注册](#小程序详细注册)
     - [用户名注册](#用户名注册)
+    - [邮箱注册](#邮箱注册)
     - [手机号注册](#手机号注册)
   - [用户登录](#用户登录)
     - [小程序登录](#小程序登录)
     - [用户名登录](#用户名登录)
+    - [邮箱登录](#邮箱登录)
     - [手机号码登录](#手机号码登录)
   - [检测登录 token 是否有效](#检测登录-token-是否有效)
   - [重置登录密码](#重置登录密码)
@@ -47,6 +52,7 @@
     - [小程序](#小程序)
     - [短信验证码认证](#短信验证码认证)
   - [设置用户名](#设置用户名)
+  - [设置邮箱地址](#设置邮箱地址)
   - [绑定小程序](#绑定小程序)
   - [获取用户信息](#获取用户信息)
   - [获取用户id、openid、unionid](#获取用户idopenidunionid)
@@ -247,46 +253,46 @@
 
 ### 读取所有省份
 
-> WXAPI.province()
+> WEBAPI.province()
 
 ### 读取下级省市区数据
 
-> WXAPI.nextRegion(pid)
+> WEBAPI.nextRegion(pid)
 
 ## 读取 Banner 列表
 
-> WXAPI.banners(Object object)
+> WEBAPI.banners(Object object)
 
 ## 公告管理
 
 ### 读取最新的一条公告
 
-> WXAPI.noticeLastOne(type)
+> WEBAPI.noticeLastOne(type)
 
 ### 获取公告列表
 
-> WXAPI.noticeList(Object object)
+> WEBAPI.noticeList(Object object)
 
 ### 获取公告详情
 
-> WXAPI.noticeDetail(id)
+> WEBAPI.noticeDetail(id)
 
 ## 读取后台vip等级（用于判断是免费后台还是专业后台）
 
-> WXAPI.vipLevel()
+> WEBAPI.vipLevel()
 
 ## 系统参数
 
 ### 读取系统参数
 
-> WXAPI.queryConfig(Object object)
+> WEBAPI.queryConfig(Object object)
 ### 批量读取系统参数
 
-> WXAPI.queryConfigBatch(keys)
+> WEBAPI.queryConfigBatch(keys)
 
 ## 获取友情链接/合作伙伴
 
-> WXAPI.friendlyPartnerList(type)
+> WEBAPI.friendlyPartnerList(type)
 
 ## JSON数据云存储
 
@@ -306,15 +312,15 @@
 
 ### 上传本地文件
 
-> WXAPI.uploadFile(token, tempFilePath)
+> WEBAPI.uploadFile(token, tempFilePath)
 
 ### 下载远程文件
 
-> WXAPI.uploadFileFromUrl(remoteFileUrl, ext)
+> WEBAPI.uploadFileFromUrl(remoteFileUrl, ext)
 
 ### 获取文件列表
 
-> WXAPI.uploadFileList(path)
+> WEBAPI.uploadFileList(path)
 
 # 安全中心
 
@@ -323,7 +329,7 @@
 ### 获取验证码图片地址
 
 ```
-WXAPI.graphValidateCodeUrl(key)
+WEBAPI.graphValidateCodeUrl(key)
 ```
 > 将该图片地址直接显示在图片控件上即可；
 > 
@@ -332,7 +338,7 @@ WXAPI.graphValidateCodeUrl(key)
 ### 校验输入验证码是否正确
 
 ```
-WXAPI.graphValidateCodeCheck(key, code)
+WEBAPI.graphValidateCodeCheck(key, code)
 ```
 > key为上面获取方法的key，必须保持一致，否则一直会显示错误；
 > 
@@ -343,7 +349,7 @@ WXAPI.graphValidateCodeCheck(key, code)
 ### 获取验证码(发送短信)
 
 ```
-WXAPI.smsValidateCode(mobile, key, picCode)
+WEBAPI.smsValidateCode(mobile, key, picCode)
 ```
 > 短信验证码自动下发到 mobile 对应的手机号码；
 > 
@@ -354,9 +360,23 @@ WXAPI.smsValidateCode(mobile, key, picCode)
 ### 校验输入验证码是否正确
 
 ```
-WXAPI.smsValidateCodeCheck(mobile, code)
+WEBAPI.smsValidateCodeCheck(mobile, code)
 ```
 > code 为用户手机上收到的验证码
+
+## 邮箱验证码
+
+### 获取验证码(发送邮件)
+
+```js
+WEBAPI.mailValidateCode(mail)
+```
+
+### 校验输入验证码是否正确
+
+```js
+WEBAPI.mailValidateCodeCheck(mail, code)
+```
 
 # 登录 & 注册
 
@@ -366,26 +386,32 @@ WXAPI.smsValidateCodeCheck(mobile, code)
 
 > 只要提供 code 即可完成注册，但是无法读取昵称、头像等敏感数据
 ```js
-WXAPI.register_simple(Object object)
+WEBAPI.register_simple(Object object)
 ```
 ### 小程序详细注册
 
 > 除了 code 外，该注册方法还需要提供 encryptedData 和 iv 参数，注册后将可以读取到用户的昵称和头像等敏感数据
 ```js
-WXAPI.register_complex(Object object)
+WEBAPI.register_complex(Object object)
 ```
 
 ### 用户名注册
 
 > 最简单的注册模式，只要提供用户名和密码即可完成注册
 ```js
-WXAPI.register_username(Object object)
+WEBAPI.register_username(Object object)
+```
+
+### 邮箱注册
+
+```js
+WEBAPI.register_email(Object object)
 ```
 
 ### 手机号注册
 
 ```js
-WXAPI.register_mobile(Object object)
+WEBAPI.register_mobile(Object object)
 ```
 
 > 最常用的一种注册方式，输入手机号码，获取短信验证码，回填校验通过后即可完成注册
@@ -397,19 +423,25 @@ WXAPI.register_mobile(Object object)
 ### 小程序登录
 
 ```js
-WXAPI.login_wx(code)
+WEBAPI.login_wx(code)
 ```
 
 ### 用户名登录
 
 ```js
-WXAPI.login_username(Object object)
+WEBAPI.login_username(Object object)
+```
+
+### 邮箱登录
+
+```js
+WEBAPI.login_email(Object object)
 ```
 
 ### 手机号码登录
 
 ```js
-WXAPI.login_mobile(mobile, pwd, deviceId, deviceName)
+WEBAPI.login_mobile(mobile, pwd, deviceId, deviceName)
 ```
 
 > deviceId、deviceName 参数用来表示登录的设备信息比如手机序列号、手机型号，小程序调用该方法，可随便传参即可；
@@ -417,13 +449,13 @@ WXAPI.login_mobile(mobile, pwd, deviceId, deviceName)
 ## 检测登录 token 是否有效
 
 ```js
-WXAPI.checkToken(token)
+WEBAPI.checkToken(token)
 ```
 
 ## 重置登录密码
 
 ```js
-WXAPI.resetPwd(mobile, pwd, code)
+WEBAPI.resetPwd(mobile, pwd, code)
 ```
 
 > 用于忘记密码找回，重置密码时候使用
@@ -433,7 +465,7 @@ WXAPI.resetPwd(mobile, pwd, code)
 ## 退出登录
 
 ```js
-WXAPI.loginout(token)
+WEBAPI.loginout(token)
 ```
 
 > 退出后，当前token将立刻失效
@@ -445,7 +477,7 @@ WXAPI.loginout(token)
 ### 小程序
 
 ```js
-WXAPI.bindMobileWxa(token, encryptedData, iv, pwd)
+WEBAPI.bindMobileWxa(token, encryptedData, iv, pwd)
 ```
 
 > 结合小程序获取用户手机号码接口实现用户绑定手机号码
@@ -459,7 +491,7 @@ WXAPI.bindMobileWxa(token, encryptedData, iv, pwd)
 ### 短信验证码认证
 
 ```js
-WXAPI.bindMobileSms(token, mobile, code, pwd)
+WEBAPI.bindMobileSms(token, mobile, code, pwd)
 ```
 
 > 请结合本文档中的短信验证码安全认证相关方法实现该功能
@@ -469,17 +501,19 @@ WXAPI.bindMobileSms(token, mobile, code, pwd)
 ## 设置用户名
 
 ```js
-WXAPI.bindUsername(token, username, pwd)
+WEBAPI.bindUsername(token, username, pwd)
 ```
 
-> 设置用户名后，将可使用该用户名进行登录；用户名在系统中是唯一的；
-> 
-> pwd 为可选参数，如果传了该参数，当前的登录密码将会被重置成传入的新密码
+## 设置邮箱地址
+
+```js
+WEBAPI.bindEmail(token, email, pwd)
+```
 
 ## 绑定小程序
 
 ```js
-WXAPI.bindOpenid(token, code)
+WEBAPI.bindOpenid(token, code)
 ```
 
 > 手机号码、用户名等方式注册的用户，通过该方法绑定小程序，后期将可以使用小程序登录
@@ -489,7 +523,7 @@ WXAPI.bindOpenid(token, code)
 ## 获取用户信息
 
 ```js
-WXAPI.userDetail(token)
+WEBAPI.userDetail(token)
 ```
 
 > base 数据存放了用户的基础信息；
@@ -501,7 +535,7 @@ WXAPI.userDetail(token)
 ## 获取用户id、openid、unionid
 
 ```js
-WXAPI.userWxinfo(token)
+WEBAPI.userWxinfo(token)
 ```
 
 > 获取当前登录用户的用户id、openid、unionid
@@ -509,13 +543,13 @@ WXAPI.userWxinfo(token)
 ## 修改用户资料
 
 ```js
-WXAPI.modifyUserInfo(Object object)
+WEBAPI.modifyUserInfo(Object object)
 ```
 
 ## 实名认证
 
 ```js
-WXAPI.idcardCheck(token, name, idCardNo)
+WEBAPI.idcardCheck(token, name, idCardNo)
 ```
 
 > 身份证实名认证方法，校验姓名和身份证号码是否匹配
@@ -527,7 +561,7 @@ WXAPI.idcardCheck(token, name, idCardNo)
 ### 获取所有的会员等级
 
 ```js
-WXAPI.userLevelList(Object object)
+WEBAPI.userLevelList(Object object)
 ```
 
 > 读取后台设置的所有的会员等级；具体参数请查阅接口文档
@@ -535,7 +569,7 @@ WXAPI.userLevelList(Object object)
 ### 查看会员等级详情
 
 ```js
-WXAPI.userLevelDetail(levelId)
+WEBAPI.userLevelDetail(levelId)
 ```
 
 > levelId 为会员等级的id
@@ -543,7 +577,7 @@ WXAPI.userLevelDetail(levelId)
 ### 会员等级收费列表
 
 ```js
-WXAPI.userLevelPrices(levelId)
+WEBAPI.userLevelPrices(levelId)
 ```
 
 > levelId 为会员等级的id，该方法可获得指定的某一个会员等级（比如：钻石会员）的收费列表
@@ -555,7 +589,7 @@ WXAPI.userLevelPrices(levelId)
 ### 购买会员
 
 ```js
-WXAPI.userLevelBuy(token, priceId, isAutoRenew, remark)
+WEBAPI.userLevelBuy(token, priceId, isAutoRenew, remark)
 ```
 
 > priceId 为上面获取的收费列表的id
@@ -567,7 +601,7 @@ WXAPI.userLevelBuy(token, priceId, isAutoRenew, remark)
 ### 获取我的购买 / 续费记录
 
 ```js
-WXAPI.userLevelBuyLogs(Object object)
+WEBAPI.userLevelBuyLogs(Object object)
 ```
 
 > 具体参数请查阅接口文档
@@ -578,13 +612,13 @@ WXAPI.userLevelBuyLogs(Object object)
 ### 获取所有的收货地址
 
 ```js
-WXAPI.queryAddress(token)
+WEBAPI.queryAddress(token)
 ```
 
 ### 添加收货地址
 
 ```js
-WXAPI.addAddress(Object object)
+WEBAPI.addAddress(Object object)
 ```
 
 > 你也可以结合小程序自带的读取收货地址接口，实现快速添加收货地址功能
@@ -592,25 +626,25 @@ WXAPI.addAddress(Object object)
 ### 更新收货地址
 
 ```js
-WXAPI.updateAddress(Object object)
+WEBAPI.updateAddress(Object object)
 ```
 
 ### 获取默认的地址
 
 ```js
-WXAPI.defaultAddress(token)
+WEBAPI.defaultAddress(token)
 ```
 
 ### 读取地址详细
 
 ```js
-WXAPI.addressDetail(token, id)
+WEBAPI.addressDetail(token, id)
 ```
 
 ### 删除收货地址
 
 ```js
-WXAPI.deleteAddress(token, id)
+WEBAPI.deleteAddress(token, id)
 ```
 
 # CMS模块
@@ -619,44 +653,44 @@ WXAPI.deleteAddress(token, id)
 
 ### 获取所有分类
 
-> WXAPI.cmsCategories()
+> WEBAPI.cmsCategories()
 > 
 ### 获取分类详情
 
-> WXAPI.cmsCategoryDetail(id)
+> WEBAPI.cmsCategoryDetail(id)
 
 ## 文章管理
 
 ### 文章列表
 
 ```js
-WXAPI.cmsArticles(Object object)
+WEBAPI.cmsArticles(Object object)
 ```
 
 ### 文章详情
 
-> WXAPI.cmsArticleDetail(id)
+> WEBAPI.cmsArticleDetail(id)
 
 ## 单页信息(关于我们/联系我们/...)
 
-> WXAPI.cmsPage(key)
+> WEBAPI.cmsPage(key)
 
 ## 获取文章标签列表(用于展示类似“标签云”)
 
-> WXAPI.cmsTags()
+> WEBAPI.cmsTags()
 
 ## 留言 & 反馈
 
 ### 提交留言反馈
 
 ```js
-WXAPI.addComment(Object object)
+WEBAPI.addComment(Object object)
 ```
 
 ### 读取留言 & 评论列表
 
 ```js
-WXAPI.commentList(Object object)
+WEBAPI.commentList(Object object)
 ```
 
 # 商城模块
@@ -666,7 +700,7 @@ WXAPI.commentList(Object object)
 ### 读取所有的门店列表
 
 ```
-WXAPI.fetchShops(Object object)
+WEBAPI.fetchShops(Object object)
 ```
 
 > 参数详见接口文档
@@ -822,7 +856,7 @@ WXAPI.fetchShops(Object object)
 ### 门店详情
 
 ```js
-WXAPI.shopSubdetail(id)
+WEBAPI.shopSubdetail(id)
 ```
 
 > id 参数为门店列表返回数据中的 id 字段
@@ -875,7 +909,7 @@ WXAPI.shopSubdetail(id)
 ## 商品分类
 
 ```
-WXAPI.goodsCategory()
+WEBAPI.goodsCategory()
 ```
 
 > 读取后台设置的所有分类数据，分类之间的上下级关系请使用 level 和 pid 进行管理
@@ -1042,7 +1076,7 @@ WXAPI.goodsCategory()
 ### 获取商品列表
 
 ```js
-WXAPI.goods(Object object)
+WEBAPI.goods(Object object)
 ```
 
 > 读取所有的商品数据，以分页的形式展示，支持按照多种方式进行排序
@@ -1137,7 +1171,7 @@ WXAPI.goods(Object object)
 ### 获取商品详情信息
 
 ```js
-WXAPI.goodsDetail(id)
+WEBAPI.goodsDetail(id)
 ```
 
 > id 参数为上面商品列表方法返回数据里的 id 字段
@@ -1235,7 +1269,7 @@ WXAPI.goodsDetail(id)
 ### 获取商品的限购设置
 
 ```js
-WXAPI.goodsLimitations(goodsId, priceId)
+WEBAPI.goodsLimitations(goodsId, priceId)
 ```
 
 > 如果商品（列表、详情）信息中 **limitation** 字段为 **true**，说明该商品开启了限购，只有设置中的会员等级用户才可以在约定时间内购买不超过指定数量
@@ -1294,7 +1328,7 @@ WXAPI.goodsLimitations(goodsId, priceId)
 ### 获取商品价格「一般用在选择不同规格尺寸后需要实时显示售价」
 
 ```js
-WXAPI.goodsPrice(goodsId, propertyChildIds)
+WEBAPI.goodsPrice(goodsId, propertyChildIds)
 ```
 
 > goodsId 为商品id
@@ -1325,7 +1359,7 @@ WXAPI.goodsPrice(goodsId, propertyChildIds)
 ### 获取商品的每日价格&每日库存「适用酒店预订、票务预订类」
 
 ```js
-WXAPI.goodsPriceDaily(goodsId, priceId)
+WEBAPI.goodsPriceDaily(goodsId, priceId)
 ```
 
 > goodsId 为商品id
@@ -1362,7 +1396,7 @@ WXAPI.goodsPriceDaily(goodsId, priceId)
 ### 计算物流/快递模板费用计算方法
 
 ```js
-WXAPI.goodsPriceFreight(Object object)
+WEBAPI.goodsPriceFreight(Object object)
 ```
 
 > 具体参数请查阅接口文档
@@ -1389,7 +1423,7 @@ WXAPI.goodsPriceFreight(Object object)
 ### 拉取当前会员可以显示的折扣信息
 
 ```js
-WXAPI.goodsRebate(token, goodsId)
+WEBAPI.goodsRebate(token, goodsId)
 ```
 
 > token 为当前登录用户的登录 token
@@ -1410,7 +1444,7 @@ WXAPI.goodsRebate(token, goodsId)
 ### 获取商品的评价
 
 ```js
-WXAPI.goodsReputation(Object object)
+WEBAPI.goodsReputation(Object object)
 ```
 
 > 读取当前商品用户的所有评价数据
@@ -1470,7 +1504,7 @@ WXAPI.goodsReputation(Object object)
 ### 收藏某个商品
 
 ```js
-WXAPI.goodsFavPut(token, goodsId)
+WEBAPI.goodsFavPut(token, goodsId)
 ```
 
 **接口返回示例：**
@@ -1485,7 +1519,7 @@ WXAPI.goodsFavPut(token, goodsId)
 ### 检测当前商品是否已被收藏
 
 ```js
-WXAPI.goodsFavCheck(token, goodsId)
+WEBAPI.goodsFavCheck(token, goodsId)
 ```
 
 **接口返回示例：**
@@ -1509,7 +1543,7 @@ WXAPI.goodsFavCheck(token, goodsId)
 ### 获取收藏的商品
 
 ```js
-WXAPI.goodsFavList(Object object)
+WEBAPI.goodsFavList(Object object)
 ```
 
 > 具体参数说明请查阅接口文档
@@ -1538,7 +1572,7 @@ WXAPI.goodsFavList(Object object)
 ### 删除收藏的某个商品
 
 ```js
-WXAPI.goodsFavDelete(token, id, goodsId)
+WEBAPI.goodsFavDelete(token, id, goodsId)
 ```
 
 > id 参数为收藏列表数据中的记录id
@@ -1561,7 +1595,7 @@ WXAPI.goodsFavDelete(token, id, goodsId)
 ### 创建订单
 
 ```js
-WXAPI.orderCreate(Object object)
+WEBAPI.orderCreate(Object object)
 ```
 
 > 具体参数说明请查看api接口文档
@@ -1579,13 +1613,13 @@ WXAPI.orderCreate(Object object)
 ### 关闭订单
 
 ```js
-WXAPI.orderClose(token, orderId)
+WEBAPI.orderClose(token, orderId)
 ```
 
 ### 删除订单
 
 ```js
-WXAPI.orderDelete(token, orderId)
+WEBAPI.orderDelete(token, orderId)
 ```
 
 > 用户删除订单，只是用户自己看不到，管理员在后台还是可以看到该订单的
@@ -1593,7 +1627,7 @@ WXAPI.orderDelete(token, orderId)
 ### 支付订单[使用余额]
 
 ```js
-WXAPI.orderPay(token, orderId)
+WEBAPI.orderPay(token, orderId)
 ```
 
 > 使用用户的钱包余额完成订单的支付
@@ -1603,7 +1637,7 @@ WXAPI.orderPay(token, orderId)
 ### 确认收货
 
 ```js
-WXAPI.orderDelivery(token, orderId)
+WEBAPI.orderDelivery(token, orderId)
 ```
 
 > 管理员针对下单进行发货操作，用户在确认收到包裹检查无误后，通过该方法来确认本次订单的收货
@@ -1613,7 +1647,7 @@ WXAPI.orderDelivery(token, orderId)
 ### 订单核销
 
 ```js
-WXAPI.orderHX(hxNumber)
+WEBAPI.orderHX(hxNumber)
 ```
 
 > hxNumber 为核销码，所以请妥善保管，商家依据核销码进行核销
@@ -1626,7 +1660,7 @@ WXAPI.orderHX(hxNumber)
 ### 订单汇总统计
 
 ```js
-WXAPI.orderStatistics(token)
+WEBAPI.orderStatistics(token)
 ```
 
 > 订单统计，用以显示订单统计或者是订单类型小红点，该方法将会返回一下几个数据：
@@ -1641,7 +1675,7 @@ WXAPI.orderStatistics(token)
 ### 获取所有订单
 
 ```js
-WXAPI.orderList(Object object)
+WEBAPI.orderList(Object object)
 ```
 
 > 具体参数请查阅api接口文档
@@ -1651,7 +1685,7 @@ WXAPI.orderList(Object object)
 ### 订单详情
 
 ```js
-WXAPI.orderDetail(token, id)
+WEBAPI.orderDetail(token, id)
 ```
 
 > 读取订单详情数据：订单信息、购物清单、订单日志记录、物流跟踪信息、库存明细、扩展属性
@@ -1661,7 +1695,7 @@ WXAPI.orderDetail(token, id)
 ### 评价接口
 
 ```js
-WXAPI.orderReputation(Object object)
+WEBAPI.orderReputation(Object object)
 ```
 
 > 订单评价，进行 好、中、差评；留言备注；截图买家秀
@@ -1671,7 +1705,7 @@ WXAPI.orderReputation(Object object)
 ### 申请退换货[售后]
 
 ```js
-WXAPI.refundApply(Object object)
+WEBAPI.refundApply(Object object)
 ```
 
 > 用户维权通道，通过该方法实现订单的退款、退货、换货等售后处理
@@ -1681,7 +1715,7 @@ WXAPI.refundApply(Object object)
 ### 申请退换货详情
 
 ```js
-WXAPI.refundApplyDetail(token, orderId)
+WEBAPI.refundApplyDetail(token, orderId)
 ```
 
 > 用以展示退换货详细数据
@@ -1689,7 +1723,7 @@ WXAPI.refundApplyDetail(token, orderId)
 ### 撤销退换货申请
 
 ```js
-WXAPI.refundApplyCancel(token, orderId)
+WEBAPI.refundApplyCancel(token, orderId)
 ```
 
 > 撤销 / 取消 维权
@@ -1697,7 +1731,7 @@ WXAPI.refundApplyCancel(token, orderId)
 ### 拉取某订单的所有售后记录
 
 ```js
-WXAPI.orderRefunds(token, orderId)
+WEBAPI.orderRefunds(token, orderId)
 ```
 
 > 一个订单允许多次退换货，该方法可以拉取到所有的售后记录
@@ -1707,7 +1741,7 @@ WXAPI.orderRefunds(token, orderId)
 ### 商品列表
 
 ```js
-WXAPI.virtualTraderList(Object object)
+WEBAPI.virtualTraderList(Object object)
 ```
 
 > 具体参数详见接口文档
@@ -1717,7 +1751,7 @@ WXAPI.virtualTraderList(Object object)
 ### 商品详情
 
 ```js
-WXAPI.virtualTraderDetail(token, id)
+WEBAPI.virtualTraderDetail(token, id)
 ```
 
 > 读取商品详情数据
@@ -1729,7 +1763,7 @@ WXAPI.virtualTraderDetail(token, id)
 ### 购买商品
 
 ```js
-WXAPI.virtualTraderBuy(token, id)
+WEBAPI.virtualTraderBuy(token, id)
 ```
 
 > 使用用户余额购买知识付费商品
@@ -1739,7 +1773,7 @@ WXAPI.virtualTraderBuy(token, id)
 ### 我的购买记录
 
 ```js
-WXAPI.virtualTraderMyBuyLogs(Object object)
+WEBAPI.virtualTraderMyBuyLogs(Object object)
 ```
 
 > 具体参数详见接口文档
@@ -1748,7 +1782,7 @@ WXAPI.virtualTraderMyBuyLogs(Object object)
 
 # 根据视频编号读取视频详情
 
-> WXAPI.videoDetail(videoId)
+> WEBAPI.videoDetail(videoId)
 
 # 营销工具
 
@@ -1757,37 +1791,37 @@ WXAPI.virtualTraderMyBuyLogs(Object object)
 ### 获取系统所有优惠券列表
 
 ```js
-WXAPI.coupons(Object object)
+WEBAPI.coupons(Object object)
 ```
 
 ### 查看优惠券详情
 
 ```js
-WXAPI.couponDetail(id)
+WEBAPI.couponDetail(id)
 ```
 
 ### 领取优惠券
 
 ```js
-WXAPI.fetchCoupons(Object object)
+WEBAPI.fetchCoupons(Object object)
 ```
 
 ### 我的所有优惠券
 
 ```js
-WXAPI.myCoupons(Object object)
+WEBAPI.myCoupons(Object object)
 ```
 
 ### 赠送优惠券给他人
 
 ```js
-WXAPI.sendCoupons(Object object)
+WEBAPI.sendCoupons(Object object)
 ```
 
 ### 兑换优惠券
 
 ```js
-WXAPI.exchangeCoupons(token, number, pwd)
+WEBAPI.exchangeCoupons(token, number, pwd)
 ```
 
 > 使用动态口令兑换优惠券，兑换后卡密失效，请妥善保管
@@ -1799,7 +1833,7 @@ WXAPI.exchangeCoupons(token, number, pwd)
 ### 获取商品砍价设置
 
 ```js
-WXAPI.kanjiaSet(goodsId)
+WEBAPI.kanjiaSet(goodsId)
 ```
 
 > 读取某个商品的砍价设置信息：总份数、底价、每次能砍掉的（随机）金额以及开始结束时间
@@ -1837,7 +1871,7 @@ WXAPI.kanjiaSet(goodsId)
 ### 发起[创建]砍价，继而邀请好友来帮自己砍到底价
 
 ```js
-WXAPI.kanjiaJoin(token, kjid)
+WEBAPI.kanjiaJoin(token, kjid)
 ```
 
 > 每个用户针对同一个 kjid 只能参与一次，多次调用本方法将返回上一次砍价的信息
@@ -1863,7 +1897,7 @@ WXAPI.kanjiaJoin(token, kjid)
 ### 我发起[创建]的砍价详情
 
 ```js
-WXAPI.kanjiaMyJoinInfo(token, kjid)
+WEBAPI.kanjiaMyJoinInfo(token, kjid)
 ```
 
 > 查看我发起的砍价目前的进展[进度]情况
@@ -1894,7 +1928,7 @@ WXAPI.kanjiaMyJoinInfo(token, kjid)
 ### 放弃上一次砍价
 
 ```js
-WXAPI.kanjiaClear(token, kjid)
+WEBAPI.kanjiaClear(token, kjid)
 ```
 
 > 因为每个用户针对同一个  kjid  只能参与一次，如果用户希望再次发起砍价，则必须要先放弃前一次砍价才能进行
@@ -1904,7 +1938,7 @@ WXAPI.kanjiaClear(token, kjid)
 ### 砍价详情
 
 ```js
-WXAPI.kanjiaDetail(kjid, joiner)
+WEBAPI.kanjiaDetail(kjid, joiner)
 ```
 
 > joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中，joiner = 979527
@@ -1942,7 +1976,7 @@ WXAPI.kanjiaDetail(kjid, joiner)
 ### 帮好友砍价
 
 ```js
-WXAPI.kanjiaHelp(token, kjid, joiner, remark)
+WEBAPI.kanjiaHelp(token, kjid, joiner, remark)
 ```
 
 > 帮助好友砍价，调用该方法后，将使得好友的当前价格越来越接近底价
@@ -1971,7 +2005,7 @@ WXAPI.kanjiaHelp(token, kjid, joiner, remark)
 ### 查询我帮好友砍掉的金额
 
 ```js
-WXAPI.kanjiaHelpDetail(token, kjid, joiner)
+WEBAPI.kanjiaHelpDetail(token, kjid, joiner)
 ```
 
 > 查询针对当前 kjid ，我帮忙砍掉的金额
@@ -1999,7 +2033,7 @@ WXAPI.kanjiaHelpDetail(token, kjid, joiner)
 ### 获取某一个商品的拼团配置
 
 ```js
-WXAPI.pingtuanSet(goodsId)
+WEBAPI.pingtuanSet(goodsId)
 ```
 
 > 读取团购的几个重要设置：几人成团、超时时间、超时未成团后如何退款等等
@@ -2029,7 +2063,7 @@ WXAPI.pingtuanSet(goodsId)
 ### 批量获取一组商品的拼团配置
 
 ```js
-WXAPI.pingtuanSets(goodsIdArray)
+WEBAPI.pingtuanSets(goodsIdArray)
 ```
 
 > 针对上面方法的补充，在有必要的场合可以一次性的读取多个商品的团购配置信息
@@ -2078,7 +2112,7 @@ WXAPI.pingtuanSets(goodsIdArray)
 ### 开团[我发起一个团购，我是团长，让别人来参加]
 
 ```js
-WXAPI.pingtuanOpen(token, goodsId)
+WEBAPI.pingtuanOpen(token, goodsId)
 ```
 
 > 开团成功后，团长要先自己下单并且完成支付，团才算是真正开启成功！
@@ -2107,7 +2141,7 @@ WXAPI.pingtuanOpen(token, goodsId)
 ### 获取某个商品当前进行中的所有拼团
 
 ```js
-WXAPI.pingtuanList(Object object)
+WEBAPI.pingtuanList(Object object)
 ```
 
 > 拉取某个商品当前所有的开团列表数据，用于展示当前商品的多组进行中/已完成的团购数据，你也可以选择其中一个团购加入购买以便可以早点成团
@@ -2117,7 +2151,7 @@ WXAPI.pingtuanList(Object object)
 ### 获取某个团购的参与用户列表
 
 ```js
-WXAPI.pingtuanJoinUsers(tuanId)
+WEBAPI.pingtuanJoinUsers(tuanId)
 ```
 
 > tuanId 为上述例子中的团号，也就是 7380，不是 2 
@@ -2125,7 +2159,7 @@ WXAPI.pingtuanJoinUsers(tuanId)
 ### 读取我参与过的所有团购记录
 
 ```js
-WXAPI.pingtuanMyJoined(Object object)
+WEBAPI.pingtuanMyJoined(Object object)
 ```
 
 > 具体参数请查阅接口文档
@@ -2137,19 +2171,19 @@ WXAPI.pingtuanMyJoined(Object object)
 ### 申请成为分销商
 
 ```js
-WXAPI.fxApply(token, name, mobile)
+WEBAPI.fxApply(token, name, mobile)
 ```
 
 ### 申请进度查询
 
 ```js
-WXAPI.fxApplyProgress(token)
+WEBAPI.fxApplyProgress(token)
 ```
 
 ### 团队管理
 
 ```js
-WXAPI.fxMembers(Object object)
+WEBAPI.fxMembers(Object object)
 ```
 
 > 查看你的1级/2级团队列表
@@ -2161,7 +2195,7 @@ WXAPI.fxMembers(Object object)
 ### 佣金记录[返佣明细]
 
 ```js
-WXAPI.fxCommisionLog(Object object)
+WEBAPI.fxCommisionLog(Object object)
 ```
 
 > 详细记录你的每一笔返佣佣金收录记录
@@ -2173,7 +2207,7 @@ WXAPI.fxCommisionLog(Object object)
 ## 读取订单积分抵扣规则
 
 ```js
-WXAPI.scoreDeductionRules()
+WEBAPI.scoreDeductionRules()
 ```
 
 > 通过该方法读取后台设置的积分抵扣规则
@@ -2181,7 +2215,7 @@ WXAPI.scoreDeductionRules()
 ## 读取积分赠送规则
 
 ```js
-WXAPI.scoreRules(Object object)
+WEBAPI.scoreRules(Object object)
 ```
 
 > 具体参数请查阅接口文档，一般不传参数使用
@@ -2191,7 +2225,7 @@ WXAPI.scoreRules(Object object)
 ### 签到规则
 
 ```js
-WXAPI.scoreSignRules()
+WEBAPI.scoreSignRules()
 ```
 
 > 读取签到一次送多少积分；连续签到x天赠送y积分
@@ -2199,13 +2233,13 @@ WXAPI.scoreSignRules()
 ### 签到
 
 ```js
-WXAPI.scoreSign(token)
+WEBAPI.scoreSign(token)
 ```
 
 ### 读取今日签到信息
 
 ```js
-WXAPI.scoreTodaySignedInfo(token)
+WEBAPI.scoreTodaySignedInfo(token)
 ```
 
 > 判断今天有没有签到
@@ -2215,7 +2249,7 @@ WXAPI.scoreTodaySignedInfo(token)
 ### 签到记录
 
 ```js
-WXAPI.scoreSignLogs(Object object)
+WEBAPI.scoreSignLogs(Object object)
 ```
 
 > 读取历史签到记录
@@ -2225,7 +2259,7 @@ WXAPI.scoreSignLogs(Object object)
 ## 使用积分券兑换积分
 
 ```js
-WXAPI.scoreExchange(token, number)
+WEBAPI.scoreExchange(token, number)
 ```
 
 > 使用积分券的券号，兑换积分
@@ -2233,7 +2267,7 @@ WXAPI.scoreExchange(token, number)
 ## 转发微信群获得积分奖励
 
 ```js
-WXAPI.shareGroupGetScore(referrer, encryptedData, iv)
+WEBAPI.shareGroupGetScore(referrer, encryptedData, iv)
 ```
 
 **referrer**
@@ -2251,7 +2285,7 @@ WXAPI.shareGroupGetScore(referrer, encryptedData, iv)
 ## 积分明细
 
 ```js
-WXAPI.scoreLogs(Object object)
+WEBAPI.scoreLogs(Object object)
 ```
 
 > 详细记录你的每一次积分变动
@@ -2261,7 +2295,7 @@ WXAPI.scoreLogs(Object object)
 ## 获取资产信息（余额、可用积分）
 
 ```js
-WXAPI.userAmount(token)
+WEBAPI.userAmount(token)
 ```
 
 ## 在线支付(充值)
@@ -2269,19 +2303,19 @@ WXAPI.userAmount(token)
 ### 获取充值规则（满多少送多少）
 
 ```js
-WXAPI.rechargeSendRules()
+WEBAPI.rechargeSendRules()
 ```
 
 ### 微信支付
 
 ```js
-WXAPI.wxpay(Object object)
+WEBAPI.wxpay(Object object)
 ```
 
 > 调用该方法后，可获得用于发起微信支付的所有数据，请将返回值根据小程序的微信支付文档唤起支付功能即可，参考代码如下：
 
 ```js
-WXAPI.wxpay({
+WEBAPI.wxpay({
   token: '登录token',
   money: 100,
   payName: '支付测试',
@@ -2316,13 +2350,13 @@ WXAPI.wxpay({
 ### 支付宝支付(半自动)
 
 ```js
-WXAPI.alipay(Object object)`
+WEBAPI.alipay(Object object)`
 ```
 
 ### 充值记录
 
 ```js
-WXAPI.payLogs(Object object)
+WEBAPI.payLogs(Object object)
 ```
 
 ## 优惠买单
@@ -2332,7 +2366,7 @@ WXAPI.payLogs(Object object)
 ### 获取买单优惠
 
 ```js
-WXAPI.payBillDiscounts()
+WEBAPI.payBillDiscounts()
 ```
 
 > 读取后台设置的满减设置列表
@@ -2340,7 +2374,7 @@ WXAPI.payBillDiscounts()
 ### 买单
 
 ```js
-WXAPI.payBill(token, money)
+WEBAPI.payBill(token, money)
 ```
 
 > money 参数请传实际的消费金额，系统自动会根据后台设置的满减规则计算实际需要支付的金额的
@@ -2348,48 +2382,48 @@ WXAPI.payBill(token, money)
 ## 资金流水
 
 ```js
-WXAPI.cashLogs(Object object)
+WEBAPI.cashLogs(Object object)
 ```
 
 ## 提现管理
 
 ### 申请提现
 
-> WXAPI.withDrawApply(token, money)
+> WEBAPI.withDrawApply(token, money)
 
 ### 提现记录
 
-> WXAPI.withDrawLogs(Object object)
+> WEBAPI.withDrawLogs(Object object)
 
 ### 提现记录详情
 
-> WXAPI.withDrawDetail(token, id)
+> WEBAPI.withDrawDetail(token, id)
 
 ## 发票管理
 
 ### 申请发票
-> WXAPI.invoiceApply(Object object)
+> WEBAPI.invoiceApply(Object object)
 ### 申请的发票列表
-> WXAPI.invoiceList(Object object)
+> WEBAPI.invoiceList(Object object)
 ### 发票详情
-> WXAPI.invoiceDetail(token, id)
+> WEBAPI.invoiceDetail(token, id)
 
 ## 押金管理
 ### 支付押金
-> WXAPI.payDeposit(Object object)
+> WEBAPI.payDeposit(Object object)
 ### 读取押金列表
-> WXAPI.depositList(Object object)
+> WEBAPI.depositList(Object object)
 ### 押金详情
-> WXAPI.depositInfo(token, id)
+> WEBAPI.depositInfo(token, id)
 ### 申请退回押金
-> WXAPI.depositBackApply(token, id)
+> WEBAPI.depositBackApply(token, id)
 
 # 小程序工具类
 
 ## 无限获取二维码
 
 ```js
-WXAPI.wxaQrcode(Object object)
+WEBAPI.wxaQrcode(Object object)
 ```
 
 > 微信有规定，只有正式上线的小程序才可以获取小程序码，所以如果你获取到的小程序码无法打开，请不要惊讶
@@ -2399,7 +2433,7 @@ WXAPI.wxaQrcode(Object object)
 ## 小程序数据解密
 
 ```js
-WXAPI.encryptedData(code, encryptedData, iv)
+WEBAPI.encryptedData(code, encryptedData, iv)
 ```
 
 > 类似微信运动之类的数据，都可以通过该方法解密成明文
@@ -2411,7 +2445,7 @@ WXAPI.encryptedData(code, encryptedData, iv)
 ### 保存 formid/预支付Id
 
 ```js
-WXAPI.addTempleMsgFormid(token, type, formId)
+WEBAPI.addTempleMsgFormid(token, type, formId)
 ```
 
 > type: form/pay ，分别代表支付还是表单提交
@@ -2431,7 +2465,7 @@ WXAPI.addTempleMsgFormid(token, type, formId)
 ### 给用户发送模板消息
 
 ```js
-WXAPI.sendTempleMsg(Object object)
+WEBAPI.sendTempleMsg(Object object)
 ```
 
 > 具体参数说明详见接口文档
@@ -2444,60 +2478,60 @@ WXAPI.sendTempleMsg(Object object)
 
 ## 获取产品列表
 
-> WXAPI.virtualTraderList(Object object)
+> WEBAPI.virtualTraderList(Object object)
 
 ## 获取产品详情
 
-> WXAPI.virtualTraderInfo(token, id)
+> WEBAPI.virtualTraderInfo(token, id)
 
 ## 购买产品
 
-> WXAPI.virtualTraderBuy(token, id)
+> WEBAPI.virtualTraderBuy(token, id)
 > 
 ## 读取成交记录
 
-> WXAPI.virtualTraderBuyLogs(Object object)
+> WEBAPI.virtualTraderBuyLogs(Object object)
 
 # 活动 & 工具
 
 ## 分布式系统唯一ID
 
-> WXAPI.uniqueId(type)
+> WEBAPI.uniqueId(type)
 
 ## 手机号段服务
 
 ### 归属地查询
 
-> WXAPI.queryMobileLocation(mobile)
+> WEBAPI.queryMobileLocation(mobile)
 
 ### 读取下一个号段
 
-> WXAPI.nextMobileSegment(Object object)
+> WEBAPI.nextMobileSegment(Object object)
 
 ## 抽奖功能
 
 ### 抽奖项目详情
 
-> WXAPI.luckyInfo(id)
+> WEBAPI.luckyInfo(id)
 
 ### 参与抽奖
 
-> WXAPI.luckyInfoJoin(id, token)
+> WEBAPI.luckyInfoJoin(id, token)
 
 ### 我的抽奖信息
 
-> WXAPI.luckyInfoJoinMy(id, token)
+> WEBAPI.luckyInfoJoinMy(id, token)
 
 ### 抽奖项目的所有抽奖记录明细
 
-> WXAPI.luckyInfoJoinLogs(Object object)
+> WEBAPI.luckyInfoJoinLogs(Object object)
 
 ## 预约/报名
 
 ### 读取所有的预约/报名项目
 
 ```js
-WXAPI.yuyueItems(Object object)
+WEBAPI.yuyueItems(Object object)
 ```
 
 > 拉取后台设置的所有预约/报名项目，小程序端可展示所有的项目、进度等情况
@@ -2507,7 +2541,7 @@ WXAPI.yuyueItems(Object object)
 ### 项目详情
 
 ```js
-WXAPI.yuyueItemDetail(id)
+WEBAPI.yuyueItemDetail(id)
 ```
 
 > 读取指定 id 的预约/报名项目详情、后台设置的扩展属性
@@ -2515,7 +2549,7 @@ WXAPI.yuyueItemDetail(id)
 ### 进行预约或者在线报名
 
 ```js
-WXAPI.yuyueJoin(Object object)
+WEBAPI.yuyueJoin(Object object)
 ```
 
 > 具体参数详见接口文档
@@ -2549,7 +2583,7 @@ WXAPI.yuyueJoin(Object object)
 ### 支付报名费
 
 ```js
-WXAPI.yuyueJoinPay(token, joinId)
+WEBAPI.yuyueJoinPay(token, joinId)
 ```
 
 > 如果后台设置的预约/报名项目需要支付一定的费用，那么用户需要通过该方法完成报名费的支付才能完成预约/报名
@@ -2557,7 +2591,7 @@ WXAPI.yuyueJoinPay(token, joinId)
 ### 更新预约/报名信息
 
 ```js
-WXAPI.yuyueJoinUpdate(token, joinId, extJsonStr)
+WEBAPI.yuyueJoinUpdate(token, joinId, extJsonStr)
 ```
 
 > 修改预约/报名的扩展信息，必须是非匿名情况下才能使用，否则没法确认修改者用户身份
@@ -2565,13 +2599,13 @@ WXAPI.yuyueJoinUpdate(token, joinId, extJsonStr)
 ### 我的报名信息
 
 ```js
-WXAPI.yuyueMyJoinInfo(token, joinId)
+WEBAPI.yuyueMyJoinInfo(token, joinId)
 ```
 
 ### 我所有的预约记录/报名记录
 
 ```js
-WXAPI.yuyueMyJoinLogs(Object object)
+WEBAPI.yuyueMyJoinLogs(Object object)
 ```
 
 > 该方法将分页展示用户的参与历史记录，具体参数详见接口文档
@@ -2579,13 +2613,13 @@ WXAPI.yuyueMyJoinLogs(Object object)
 ### 读取某个项目的所有报名团队列表
 
 ```js
-WXAPI.yuyueTeams(Object object)
+WEBAPI.yuyueTeams(Object object)
 ```
 
 ### 查看团队详情
 
 ```js
-WXAPI.yuyueTeamDetail(teamId)
+WEBAPI.yuyueTeamDetail(teamId)
 ```
 
 > 上述方法中获取到的团队ID
@@ -2593,13 +2627,13 @@ WXAPI.yuyueTeamDetail(teamId)
 ### 拉取团队成员列表
 
 ```js
-WXAPI.yuyueTeamMembers(Object object)
+WEBAPI.yuyueTeamMembers(Object object)
 ```
 
 ### 团队长删除[踢]团队成员
 
 ```js
-WXAPI.yuyueTeamDeleteMember(token, joinId)
+WEBAPI.yuyueTeamDeleteMember(token, joinId)
 ```
 
 ## 投票功能
@@ -2609,7 +2643,7 @@ WXAPI.yuyueTeamDeleteMember(token, joinId)
 ### 投票项目
 
 ```js
-WXAPI.voteItems(Object object)
+WEBAPI.voteItems(Object object)
 ```
 
 > 读取所有的投票项目，下面的方法均是针对其中某一个投票项目进行参与
@@ -2619,7 +2653,7 @@ WXAPI.voteItems(Object object)
 ### 投票详情
 
 ```js
-WXAPI.voteItemDetail(id)
+WEBAPI.voteItemDetail(id)
 ```
 
 > 投票项目的详细数据
@@ -2631,7 +2665,7 @@ WXAPI.voteItemDetail(id)
 ### 我的投票
 
 ```js
-WXAPI.myVote(token, voteId)
+WEBAPI.myVote(token, voteId)
 ```
 
 > 查看针对 voteId 这个投票项目，我的投票情况
@@ -2641,7 +2675,7 @@ WXAPI.myVote(token, voteId)
 ### 我要投票
 
 ```js
-WXAPI.vote(token, voteId, items, remark)
+WEBAPI.vote(token, voteId, items, remark)
 ```
 
 > 投票动作，具体参数说明:
@@ -2655,7 +2689,7 @@ WXAPI.vote(token, voteId, items, remark)
 ### 查看投票明细
 
 ```js
-WXAPI.voteLogs(Object object)
+WEBAPI.voteLogs(Object object)
 ```
 
 > 查询某个投票项目所有的参与者名录、以及具体的投票选项
@@ -2665,7 +2699,7 @@ WXAPI.voteLogs(Object object)
 ## 商品条码查询
 
 ```js
-WXAPI.queryBarcode(barcode)
+WEBAPI.queryBarcode(barcode)
 ```
 > barcode 为商品的条码，可以利用小程序的扫码api、扫码枪等实现快速识别条码
 
@@ -2677,7 +2711,7 @@ WXAPI.queryBarcode(barcode)
 > url 参数为原始的长链接地址
 
 ```
-WXAPI.shortUrl(url)
+WEBAPI.shortUrl(url)
 ```
 
 ## 地图工具
@@ -2685,7 +2719,7 @@ WXAPI.shortUrl(url)
 ### 计算2个坐标之间的距离
 
 ```
-WXAPI.mapDistance(lat1, lng1, lat2, lng2)
+WEBAPI.mapDistance(lat1, lng1, lat2, lng2)
 ```
 
 ### 将坐标地址转换为详细地址
@@ -2694,13 +2728,13 @@ WXAPI.mapDistance(lat1, lng1, lat2, lng2)
 > 
 > 浙江省杭州市拱墅区环城北路318号
 ```
-WXAPI.mapQQAddress(location, coord_type)
+WEBAPI.mapQQAddress(location, coord_type)
 ```
 
 ### 地图上搜索
 
 ```
-WXAPI.mapQQSearch(Object object)
+WEBAPI.mapQQSearch(Object object)
 ```
 
 > 在地图上搜索地理位置，例如找肯德基，找星巴克等等;
@@ -2731,7 +2765,7 @@ WXAPI.mapQQSearch(Object object)
 ### 获取所有的队列
 
 ```js
-WXAPI.queuingTypes(status)
+WEBAPI.queuingTypes(status)
 ```
 
 > 获取所有的叫号队列
@@ -2745,7 +2779,7 @@ WXAPI.queuingTypes(status)
 ### 取号
 
 ```js
-WXAPI.queuingGet(token, typeId, mobile)
+WEBAPI.queuingGet(token, typeId, mobile)
 ```
 
 > 用户需要登录后才能取号，所以请提供正确的 token
@@ -2757,7 +2791,7 @@ WXAPI.queuingGet(token, typeId, mobile)
 ### 我的取号情况
 
 ```js
-WXAPI.queuingMy(token, typeId, status)
+WEBAPI.queuingMy(token, typeId, status)
 ```
 
 > typeId 为你要取号的队列的id，如果不传则获取所有队列的取号信息
@@ -2771,7 +2805,7 @@ WXAPI.queuingMy(token, typeId, status)
 ### 读取好友列表
 
 ```js
-WXAPI.friendList(Object object)
+WEBAPI.friendList(Object object)
 ```
 
 > 拉取我的好友列表，分页展示
@@ -2781,7 +2815,7 @@ WXAPI.friendList(Object object)
 ### 添加好友
 
 ```js
-WXAPI.addFriend(token, uid)
+WEBAPI.addFriend(token, uid)
 ```
 
 > 添加 uid 指定用户编号的用户为好友
@@ -2789,7 +2823,7 @@ WXAPI.addFriend(token, uid)
 ### 查看好友详情
 
 ```js
-WXAPI.friendUserDetail(token, uid)
+WEBAPI.friendUserDetail(token, uid)
 ```
 
 > 查看 uid 指定用户编号的好友用户资料
@@ -2801,7 +2835,7 @@ WXAPI.friendUserDetail(token, uid)
 ### 站内消息列表
 
 ```js
-WXAPI.messageList(Object object)
+WEBAPI.messageList(Object object)
 ```
 
 > 具体参数请查阅接口文档
@@ -2809,11 +2843,11 @@ WXAPI.messageList(Object object)
 ### 设置为已读
 
 ```js
-WXAPI.messageRead(token, id)
+WEBAPI.messageRead(token, id)
 ```
 
 ### 删除站内信
 
 ```js
-WXAPI.messageDelete(token, id)
+WEBAPI.messageDelete(token, id)
 ```
