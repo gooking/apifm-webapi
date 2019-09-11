@@ -45,7 +45,9 @@
     - [邮箱登录](#邮箱登录)
     - [手机号码登录](#手机号码登录)
   - [检测登录 token 是否有效](#检测登录-token-是否有效)
-  - [重置登录密码](#重置登录密码)
+  - [重置密码](#重置密码)
+    - [用手机找回密码](#用手机找回密码)
+    - [用邮箱找回密码](#用邮箱找回密码)
   - [退出登录](#退出登录)
 - [用户信息](#用户信息)
   - [绑定手机号码](#绑定手机号码)
@@ -452,15 +454,27 @@ WEBAPI.login_mobile(mobile, pwd, deviceId, deviceName)
 WEBAPI.checkToken(token)
 ```
 
-## 重置登录密码
+## 重置密码
+
+### 用手机找回密码
 
 ```js
-WEBAPI.resetPwd(mobile, pwd, code)
+WEBAPI.resetPwdUseMobileCode(mobile, pwd, code)
 ```
 
-> 用于忘记密码找回，重置密码时候使用
-> 
-> 填写手机号码，系统下发短信验证码，回填正确的验证码后完成新密码的设置
+用于忘记密码找回，重置密码时候使用
+
+填写手机号码，系统下发短信验证码，回填正确的验证码后完成新密码的设置
+
+### 用邮箱找回密码
+
+```js
+WEBAPI.resetPwdUseEmailCode(email, pwd, code)
+```
+
+用于忘记密码找回，重置密码时候使用
+
+填写邮箱地址，系统下发邮件验证码，回填正确的验证码后完成新密码的设置
 
 ## 退出登录
 
@@ -507,8 +521,10 @@ WEBAPI.bindUsername(token, username, pwd)
 ## 设置邮箱地址
 
 ```js
-WEBAPI.bindEmail(token, email, pwd)
+WEBAPI.bindEmail(token, email, code, pwd)
 ```
+
+通过邮箱验证码校验后，绑定用户的邮箱地址
 
 ## 绑定小程序
 
