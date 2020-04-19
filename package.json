@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "1.1.1",
-  "description": "修复邮箱地址账户类接口",
+  "version": "1.2.0",
+  "description": "增加了微信扫码支付方法 wxpayQrcode",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -183,6 +183,9 @@ module.exports = {
   wxpay: (data) => {
     return request('/pay/wx/wxapp', true, 'post', data)
   },
+  wxpayQrcode: (data) => {
+    return request('/pay/wx/qrcode', true, 'post', data)
+  },
   alipay: (data) => {
     return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data)
   },
