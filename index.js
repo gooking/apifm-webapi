@@ -842,4 +842,29 @@ module.exports = {
       token, email, code, pwd
     })
   },
+  shippingCarInfo: (token) => {
+    return request('/shopping-cart/info', true, 'get', {
+      token
+    })
+  },
+  shippingCarInfoAddItem: (token, goodsId, number, sku='') => {
+    return request('/shopping-cart/add', true, 'post', {
+      token, goodsId, number, sku
+    })
+  },
+  shippingCarInfoModifyNumber: (token, key, number) => {
+    return request('/shopping-cart/modifyNumber', true, 'post', {
+      token, key, number
+    })
+  },
+  shippingCarInfoRemoveItem: (token, key) => {
+    return request('/shopping-cart/remove', true, 'post', {
+      token, key
+    })
+  },
+  shippingCarInfoRemoveAll: (token) => {
+    return request('/shopping-cart/empty', true, 'post', {
+      token
+    })
+  },
 }
