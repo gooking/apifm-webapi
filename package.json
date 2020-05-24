@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "1.6.1",
-  "description": "增加了一键授权登陆注册",
+  "version": "1.7.0",
+  "description": "增加 jssdkSign 网页授权sdk方法",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
