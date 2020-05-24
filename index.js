@@ -867,4 +867,12 @@ module.exports = {
       token
     })
   },
+  qqlogin: (code) => {
+    return request('/user/qqconnect/authorization', true, 'get', {
+      code
+    })
+  },
+  siteStatistics: () => {
+    return request('/site/statistics', true, 'get')
+  },
 }

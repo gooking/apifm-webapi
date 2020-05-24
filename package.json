@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "1.3.0",
-  "description": "增加了购物车的方法",
+  "version": "1.5.0",
+  "description": "增加了站点信息统计方法",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
