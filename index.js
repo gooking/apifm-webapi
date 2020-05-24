@@ -876,6 +876,6 @@ module.exports = {
     return request('/site/statistics', true, 'get')
   },
   authorization: (data) => {
-    return request('/user/wxmp/auth', true, 'post')
+    return request('/user/wxmp/auth', true, 'post', data)
   },
 }
