@@ -881,4 +881,10 @@ module.exports = {
   jssdkSign: (url) => {
     return request('/wx/jssdk/sign', true, 'post', { url })
   },
+  gpsDistance: (data) => {
+    return request('/common/map/qq/distance', false, 'post', data)
+  },
+  peisongfei: () => {
+    return request('/fee/peisong/list', true, 'get')
+  },
 }
