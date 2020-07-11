@@ -887,4 +887,7 @@ module.exports = {
   peisongfei: () => {
     return request('/fee/peisong/list', true, 'get')
   },
+  wxOpenAuthorization: (data) => {
+    return request('/user/wxsns/authorization', true, 'post', data)
+  },
 }

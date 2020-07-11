@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "1.8.0",
-  "description": "增加 定位距离及经纬度",
+  "version": "1.9.0",
+  "description": "增加 微信一键登陆注册接口",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
