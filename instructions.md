@@ -178,7 +178,8 @@
     - [获取资产信息（余额、可用积分）](#获取资产信息余额可用积分)
     - [在线支付(充值)](#在线支付充值)
         - [获取充值规则（满多少送多少）](#获取充值规则满多少送多少)
-        - [微信支付](#微信支付)
+        - [微信公众号jsapi支付](#微信公众号jsapi支付)
+        - [微信h5支付](#微信h5支付)
         - [微信扫码支付](#微信扫码支付)
         - [支付宝支付(半自动)](#支付宝支付半自动)
         - [充值记录](#充值记录)
@@ -2518,46 +2519,57 @@ WEBAPI.userAmount(token)
 WEBAPI.rechargeSendRules()
 ```
 
-### 微信支付
+### 微信公众号jsapi支付
 
 ```js
-WEBAPI.wxpay(Object object)
+WEBAPI.wxpayJsapi(Object object)
 ```
 
-> 调用该方法后，可获得用于发起微信支付的所有数据，请将返回值根据小程序的微信支付文档唤起支付功能即可，参考代码如下：
+需要使用 WeixinJSBridge 来唤醒支付：
+
+页面先初始化 WeixinJSBridge
+```js
+if (typeof WeixinJSBridge == "undefined"){
+  if( document.addEventListener ){
+    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+  }else if (document.attachEvent){
+    document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+  }
+}else{
+  onBridgeReady();
+}
+```
+
+发起公众号支付
 
 ```js
-WEBAPI.wxpay({
-  token: '登录token',
-  money: 100,
-  payName: '支付测试',
-  nextAction: '{"type": 0, "id": 1}'
-}).then(function (res) {
-  if (res.code == 0) {
-    // 小程序代码发起支付
-    wx.requestPayment({
-      timeStamp: res.data.timeStamp,
-      nonceStr: res.data.nonceStr,
-      package: 'prepay_id=' + res.data.prepayId,
-      signType: 'MD5',
-      paySign: res.data.sign,
-      fail: function (aaa) {
-        wx.showToast({
-          title: '支付失败:' + aaa
-        })
-      },
-      success: function () {
-        // 提示支付成功
-        wx.showToast({
-          title: '支付成功'
-        })
-      }
-    })
+window.WeixinJSBridge.invoke(
+  'getBrandWCPayRequest', {
+    'appId': res.data.appid,
+    'timeStamp': res.data.timeStamp,
+    'nonceStr': res.data.nonceStr,
+    'package': 'prepay_id=' + res.data.prepayId,
+    'signType': 'MD5',
+    'paySign': res.data.sign
+},
+function(res) {
+  if (res.err_msg === 'get_brand_wcpay_request:ok') {
+    // 支付成功后跳转
   }
 })
 ```
 
-> 具体参数请查阅接口文档说明，尤其要注意 **nextAction** 参数的使用
+### 微信h5支付
+
+```js
+WEBAPI.wxpayH5(Object object)
+```
+
+在微信客户端外的移动端网页展示商品或服务，用户在前述页面确认使用微信支付时，商户发起本服务呼起微信客户端进行支付。
+
+主要用于触屏版的手机浏览器请求微信支付的场景。可以方便的从外部浏览器唤起微信支付。
+
 
 ### 微信扫码支付
 

@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "1.9.0",
-  "description": "增加 微信一键登陆注册接口",
+  "version": "1.10.0",
+  "description": "增加微信支付 jsapi 和 h5 方式",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -180,8 +180,11 @@ module.exports = {
   sendTempleMsg: (data) => {
     return request('/template-msg/put', true, 'post', data)
   },
-  wxpay: (data) => {
-    return request('/pay/wx/wxapp', true, 'post', data)
+  wxpayH5: (data) => {
+    return request('/pay/wx/h5', true, 'post', data)
+  },
+  wxpayJsapi: (data) => {
+    return request('/pay/wx/jsapi', true, 'post', data)
   },
   wxpayQrcode: (data) => {
     return request('/pay/wx/qrcode', true, 'post', data)
