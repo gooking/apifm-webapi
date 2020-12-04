@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "1.10.0",
-  "description": "增加微信支付 jsapi 和 h5 方式",
+  "version": "1.11.0",
+  "description": "增加 WXAPI.loginMobileSmsCode(Object object) 接口",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
