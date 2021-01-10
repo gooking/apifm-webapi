@@ -896,4 +896,26 @@ module.exports = {
   wxOpenAuthorization: (data) => {
     return request('/user/wxsns/authorization', true, 'post', data)
   },
+  // 京东联盟相关接口
+  unionjdCategoryList: data => {
+    return request('/unionjd/category/list', true, 'get', data)
+  },
+  unionjdGoodsSearch: data => {
+    return request('/unionjd/goods/search', true, 'post', data)
+  },
+  unionjdGoodsJingfen: data => {
+    return request('/unionjd/goods/jingfen', true, 'get', data)
+  },
+  unionjdGoodsDetail: skuIds => {
+    return request('/unionjd/goods/detail', true, 'get', { skuIds })
+  },
+  unionjdGoodsCommision: skuIds => {
+    return request('/unionjd/goods/commision', true, 'get', { skuIds })
+  },
+  unionjdPromotionCommon: (materialId, siteId) => {
+    return request('/unionjd/promotion/common', true, 'get', { materialId, siteId })
+  },
+  unionjdPromotionBysubunionid: materialId => {
+    return request('/unionjd/promotion/bysubunionid', true, 'get', { materialId })
+  },
 }
