@@ -164,6 +164,9 @@
         - [申请进度查询](#申请进度查询)
         - [团队管理](#团队管理)
         - [佣金记录[返佣明细]](#佣金记录返佣明细)
+        - [分销商累计销售额排行榜](#分销商累计销售额排行榜)
+        - [分销商某天的销售额排行榜](#分销商某天的销售额排行榜)
+        - [名下团队成员人数统计](#名下团队成员人数统计)
 - [积分模块](#积分模块)
     - [读取订单积分抵扣规则](#读取订单积分抵扣规则)
     - [读取积分赠送规则](#读取积分赠送规则)
@@ -2421,9 +2424,36 @@ WEBAPI.fxMembers(Object object)
 WEBAPI.fxCommisionLog(Object object)
 ```
 
-> 详细记录你的每一笔返佣佣金收录记录
-> 
-> 具体参数说明请查阅接口文档
+详细记录你的每一笔返佣佣金收录记录
+
+
+### 分销商累计销售额排行榜
+
+```js
+WXAPI.fxSaleroomRankTotal(page, pageSize)
+```
+
+系统参数中添加开关类型参数 statistics_saleroom_open 才有效
+
+### 分销商某天的销售额排行榜
+
+```js
+WXAPI.fxSaleroomRankDaily(page, pageSize, day)
+```
+
+系统参数中添加开关类型参数 statistics_saleroom_open 才有效
+
+### 名下团队成员人数统计
+
+```js
+WXAPI.fxMembersStatistics(token)
+```
+
+接口返回如下数据：
+- totleFans 全部粉丝数量
+- totleChildFxs 全部分销商数量
+- totleChildFxsLevel1 全部直属分销商数量
+- totleChildFxsLevel2 全部间接分销商数量
 
 # 积分模块
 

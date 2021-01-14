@@ -276,13 +276,16 @@ module.exports = {
   goodsReputation: (data) => {
     return request('/shop/goods/reputation', true, 'post', data)
   },
-  goodsFavList: (data) => {
+  goodsFavList: data => {
     return request('/shop/goods/fav/list', true, 'post', data)
   },
   goodsFavPut: (token, goodsId) => {
     return request('/shop/goods/fav/add', true, 'post', {
       token, goodsId
     })
+  },
+  goodsFavAdd: data => {
+    return request('/shop/goods/fav/add', true, 'post', data)
   },
   goodsFavCheck: (token, goodsId) => {
     return request('/shop/goods/fav/check', true, 'get', {
@@ -293,6 +296,9 @@ module.exports = {
     return request('/shop/goods/fav/delete', true, 'post', {
       token, id, goodsId
     })
+  },
+  goodsFavDeleteV2: data => {
+    return request('/shop/goods/fav/delete', true, 'post', data)
   },
   coupons: (data) => {
     return request('/discounts/coupons', true, 'get', data)
@@ -475,6 +481,12 @@ module.exports = {
       token
     })
   },
+  siteStatisticsSaleroom: (data) => {
+    return request('/site/statistics/saleroom', true, 'get', data)
+  },
+  siteStatisticsSaleroomYear: (year = '') => {
+    return request('/site/statistics/saleroom/year', true, 'get', { year })
+  },
   orderRefunds: (token, orderId) => {
     return request('/order/refund', true, 'get', {
       token,
@@ -486,6 +498,9 @@ module.exports = {
       money,
       token
     })
+  },
+  withDrawApplyV2: data => {
+    return request('/user/withDraw/apply', true, 'post', data)
   },
   withDrawDetail: (token, id) => {
     return request('/user/withDraw/detail', true, 'get', {
@@ -522,17 +537,47 @@ module.exports = {
   vipLevel: () => {
     return request('/config/vipLevel', true, 'get')
   },
+  fxSetting: () => {
+    return request('/saleDistribution/setting', true, 'get')
+  },
   fxApply: (token, name, mobile) => {
     return request('/saleDistribution/apply', true, 'post', { token, name, mobile })
   },
+  fxBuy: token => {
+    return request('/saleDistribution/buy', true, 'post', { token })
+  },
   fxApplyProgress: (token) => {
     return request('/saleDistribution/apply/progress', true, 'get', { token })
+  },
+  fxApplyProgressV2: (token) => {
+    return request('/saleDistribution/apply/progress/v2', true, 'get', { token: token });
   },
   fxMembers: (data) => {
     return request('/saleDistribution/members', true, 'post', data)
   },
   fxCommisionLog: (data) => {
     return request('/saleDistribution/commision/log', true, 'post', data)
+  },
+  fxCommisionFreezeAmount: (token) => {
+    return request('/saleDistribution/commission/freeze', true, 'get', { token })
+  },
+  fxSaleroomRankTotal: (page, pageSize) => {
+    return request('/saleDistribution/sale-room-rank/total', true, 'get', {
+      page, pageSize
+    })
+  },
+  fxSaleroomRankDaily: (page, pageSize, day) => {
+    return request('/saleDistribution/sale-room-rank/daily', true, 'get', {
+      page, pageSize, day
+    })
+  },
+  fxMembersStatistics: token => {
+    return request('/saleDistribution/members/statistics', true, 'get', { token })
+  },
+  goodsSellNumberStatistics: (page, pageSize, goodsId = '') => {
+    return request('/site/goods/statistics', true, 'get', {
+      page, pageSize, goodsId
+    })
   },
   wxaQrcode: (data) => {
     return request('/qrcode/wxa/unlimit', true, 'post', data)
@@ -896,26 +941,65 @@ module.exports = {
   wxOpenAuthorization: (data) => {
     return request('/user/wxsns/authorization', true, 'post', data)
   },
+  momentsCategory: () => {
+    return request('/momentsCategory/list', true, 'get')
+  },
+  momentsList: data => {
+    return request('/moments/list', true, 'post', data)
+  },
+  momentsdetail: id => {
+    return request('/moments/detail', true, 'get', { id })
+  },
+  adPosition: key => {
+    return request('/site/adPosition/info', true, 'get', { key })
+  },
+  goodsVisitLog: data => {
+    return request('/goods/visitLog', true, 'post', data)
+  },
+  goodsVisitLogAdd: data => {
+    return request('/goods/visitLog/add', true, 'post', data)
+  },
+  goodsVisitLogDelete: data => {
+    return request('/goods/visitLog/delete', true, 'post', data)
+  },
+  channelDataPush: (key, content) => {
+    return request('/channelData/push', true, 'post', { key, content })
+  },
+  channelDataPull: (key) => {
+    return request('/channelData/pull', true, 'get', { key })
+  },
   // 京东联盟相关接口
   unionjdCategoryList: data => {
-    return request('/unionjd/category/list', true, 'get', data)
+    return request('/unionjd/category/list', false, 'get', data)
   },
   unionjdGoodsSearch: data => {
-    return request('/unionjd/goods/search', true, 'post', data)
+    return request('/unionjd/goods/search', false, 'post', data)
   },
   unionjdGoodsJingfen: data => {
-    return request('/unionjd/goods/jingfen', true, 'get', data)
+    return request('/unionjd/goods/jingfen', false, 'get', data)
   },
   unionjdGoodsDetail: skuIds => {
-    return request('/unionjd/goods/detail', true, 'get', { skuIds })
+    return request('/unionjd/goods/detail', false, 'get', { skuIds })
   },
   unionjdGoodsCommision: skuIds => {
-    return request('/unionjd/goods/commision', true, 'get', { skuIds })
+    return request('/unionjd/goods/commision', false, 'get', { skuIds })
   },
-  unionjdPromotionCommon: (materialId, siteId) => {
-    return request('/unionjd/promotion/common', true, 'get', { materialId, siteId })
+  unionjdPromotionCommon: data => {
+    return request('/unionjd/promotion/common', false, 'post', data)
   },
-  unionjdPromotionBysubunionid: materialId => {
-    return request('/unionjd/promotion/bysubunionid', true, 'get', { materialId })
+  unionjdPromotionBysubunionid: data => {
+    return request('/unionjd/promotion/bysubunionid', false, 'post', data)
+  },
+  unionjdPromotionChangeMyUrl: data => {
+    return request('/unionjd/promotion/changeMyUrl', false, 'post', data)
+  },
+  unionjdActivityList: data => {
+    return request('/unionjd/activity/list', false, 'post', data)
+  },
+  unionjdOrderQuery: data => {
+    return request('/unionjd/order/query', false, 'get', data)
+  },
+  unionjdOrderList: data => {
+    return request('/unionjd/order/list', false, 'post', data)
   },
 }
