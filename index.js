@@ -1,5 +1,3 @@
-// 小程序开发api接口工具包，https://github.com/gooking/wxapi
-
 const axios = require('axios')
 const qs = require('qs')
 
@@ -78,6 +76,7 @@ module.exports = {
     timeout = _timeout
   },
   request: baseRequest,
+  requestX: request,
   queryMobileLocation: (mobile = '') => {
     return request('/common/mobile-segment/location', false, 'get', { mobile })
   },
@@ -582,25 +581,24 @@ module.exports = {
   wxaQrcode: (data) => {
     return request('/qrcode/wxa/unlimit', true, 'post', data)
   },
-  uploadFile: (token, tempFilePath) => {
+  uploadFile: (tempFilePath, expireHours) => {
     const uploadUrl = API_BASE_URL + '/' + subDomain + '/dfs/upload/file'
+    let formData = new FormData()
+    formData.append("upfile", tempFilePath)
+    if (expireHours) {
+      formData.append("expireHours", expireHours)
+    }
+		let config = {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		}
+    // return axios.post(uploadUrl, formData, config)
     return new Promise((resolve, reject) => {
-      wx.uploadFile({
-        url: uploadUrl,
-        filePath: tempFilePath,
-        name: 'upfile',
-        formData: {
-          'token': token
-        },
-        success(res) {
-          resolve(JSON.parse(res.data))
-        },
-        fail(error) {
-          reject(error)
-        },
-        complete(aaa) {
-          // 加载完成
-        }
+      axios.post(uploadUrl, formData, config).then(res => {
+        resolve(res.data)
+      }).catch(e => {
+        reject(e)
       })
     })
   },
@@ -696,6 +694,9 @@ module.exports = {
   },
   uniqueId: (type = '') => {
     return request('/uniqueId/get', true, 'get', { type })
+  },
+  sequence: (type = '', defValue = '') => {
+    return request('/uniqueId/sequence', true, 'get', { type, defValue })
   },
   queryBarcode: (barcode = '') => {
     return request('/barcode/info', true, 'get', { barcode })
@@ -962,11 +963,22 @@ module.exports = {
   goodsVisitLogDelete: data => {
     return request('/goods/visitLog/delete', true, 'post', data)
   },
+  goodsVisitLogClear: (token) => {
+    return request('/goods/visitLog/clear', true, 'post', { token })
+  },
   channelDataPush: (key, content) => {
     return request('/channelData/push', true, 'post', { key, content })
   },
   channelDataPull: (key) => {
     return request('/channelData/pull', true, 'get', { key })
+  },
+  wxaMpLiveRooms: () => {
+    return request('/wx/live/rooms', true, 'get')
+  },
+  wxaMpLiveRoomHisVedios: (roomId) => {
+    return request('/wx/live/his', true, 'get', {
+      roomId
+    })
   },
   // 京东联盟相关接口
   unionjdCategoryList: data => {
@@ -996,10 +1008,19 @@ module.exports = {
   unionjdActivityList: data => {
     return request('/unionjd/activity/list', false, 'post', data)
   },
+  unionjdOrderStatistics: data => {
+    return request('/unionjd/order/statistics', false, 'get', data)
+  },
   unionjdOrderQuery: data => {
     return request('/unionjd/order/query', false, 'get', data)
   },
   unionjdOrderList: data => {
     return request('/unionjd/order/list', false, 'post', data)
+  },
+  unionjdRobotGroupList: data => {
+    return request('/unionjd/robotGroup/list', false, 'get', data)
+  },
+  unionjdRobotGroupApply: data => {
+    return request('/unionjd/robotGroup/apply', false, 'post', data)
   },
 }

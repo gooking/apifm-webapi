@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "1.24.0",
-  "description": "增加京东联盟订单",
+  "version": "1.32.0",
+  "description": "增加requestX方法",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
