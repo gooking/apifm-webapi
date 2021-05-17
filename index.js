@@ -3,6 +3,7 @@ const qs = require('qs')
 
 var API_BASE_URL = 'https://api.it120.cc'
 var subDomain = 'tz'
+var merchantId = '0'
 var timeout = 60000
 
 // 创建axios实例
@@ -71,6 +72,9 @@ module.exports = {
   },
   init: (b) => {
     subDomain = b
+  },
+  setMerchantId: (mchid) => {
+    merchantId = mchid
   },
   timeout: (_timeout) => {
     timeout = _timeout
@@ -1022,5 +1026,69 @@ module.exports = {
   },
   unionjdRobotGroupApply: data => {
     return request('/unionjd/robotGroup/apply', false, 'post', data)
+  },
+  unionjdRobotGroupMessageList: data => {
+    return request('/unionjd/robotGroupMessage/list', false, 'get', data)
+  },
+  unionjdRobotGroupMessageAdd: data => {
+    return request('/unionjd/robotGroupMessage/add', false, 'post', data)
+  },
+  unionjdRobotGroupMessageDel: data => {
+    return request('/unionjd/robotGroupMessage/del', false, 'post', data)
+  },
+  unionjdYsWidthDrawMemberInfo: data => {
+    return request('/unionjd/ysWidthDraw/memberInfo', false, 'get', data)
+  },
+  unionjdYsWidthDrawMemberAdd: data => {
+    return request('/unionjd/ysWidthDraw/memberAdd', false, 'post', data)
+  },
+  unionjdShopInfo: uid => {
+    return request('/unionjd/shop/info', false, 'get', { uid })
+  },
+  // 京东VOP相关接口
+  jdvopGoodsList: data => {
+    return request(`/jdvop/${merchantId}/goods/list`, false, 'post', data)
+  },
+  jdvopGoodsCheckCanBuy: data => {
+    return request(`/jdvop/${merchantId}/goods/checkCanBuy`, false, 'post', data)
+  },
+  jdvopGoodsDetail: goodsId => {
+    return request(`/jdvop/${merchantId}/goods/detail`, false, 'get', {
+      skuId: goodsId,
+      queryExts: 'wxintroduction'
+    })
+  },
+  jdvopGoodsSkuImages: goodsId => {
+    return request(`/jdvop/${merchantId}/goods/skuImages`, false, 'get', {
+      skuId: goodsId
+    })
+  },
+  jdvopCartInfo: token => {
+    return request(`/jdvop/${merchantId}/shopping-cart/info`, false, 'get', {
+      token
+    })
+  },
+  jdvopCartAdd: data => {
+    return request(`/jdvop/${merchantId}/shopping-cart/add`, false, 'post', data)
+  },
+  jdvopCartModifyNumber: (token, key, number) => {
+    return request(`/jdvop/${merchantId}/shopping-cart/modifyNumber`, false, 'post', {
+      token, key, number
+    })
+  },
+  jdvopCartSelect: (token, key, selected) => {
+    return request(`/jdvop/${merchantId}/shopping-cart/select`, false, 'post', {
+      token, key, selected
+    })
+  },
+  jdvopCartRemove: (token, key) => {
+    return request(`/jdvop/${merchantId}/shopping-cart/remove`, false, 'post', {
+      token, key
+    })
+  },
+  jdvopCartEmpty: token => {
+    return request(`/jdvop/${merchantId}/shopping-cart/empty`, false, 'post', {
+      token
+    })
   },
 }

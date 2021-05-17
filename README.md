@@ -8,6 +8,11 @@ web开发云接口工具包，无需服务器，无需开发后台，开箱即�
 
 欢迎大家进群交流，文档持续更新中...
 
+# 其他镜像
+
+- [Github](https://github.com/gooking/apifm-webapi)
+- [码云](https://gitee.com/javazj/apifm-webapi)
+
 # 平台支持
 
 * [微信小程序开发](https://github.com/gooking/apifm-wxapi)
