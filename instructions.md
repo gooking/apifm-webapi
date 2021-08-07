@@ -778,7 +778,7 @@ WEBAPI.deleteAddress(token, id)
 ### 文章列表
 
 ```js
-WEBAPI.cmsArticles(Object object)
+WEBAPI.cmsArticlesV2(Object object)
 ```
 
 ### 文章详情

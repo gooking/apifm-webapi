@@ -636,6 +636,9 @@ module.exports = {
   cmsArticles: (data) => {
     return request('/cms/news/list', true, 'post', data)
   },
+  cmsArticlesV2: (data) => {
+    return request('/cms/news/list/v2', true, 'post', data)
+  },
   cmsArticleUsefulLogs: (data) => {
     return request('/cms/news/useful/logs', true, 'post', data)
   },
