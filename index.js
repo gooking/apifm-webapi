@@ -2,7 +2,7 @@ const axios = require('axios')
 const qs = require('qs')
 
 var API_BASE_URL = 'https://api.it120.cc'
-var subDomain = 'tz'
+var subDomain = '-'
 var merchantId = '0'
 var timeout = 60000
 
@@ -182,6 +182,9 @@ module.exports = {
   },
   sendTempleMsg: (data) => {
     return request('/template-msg/put', true, 'post', data)
+  },
+  payVariableUrl: (url, data) => {
+    return request(url, true, 'post', data)
   },
   wxpayH5: (data) => {
     return request('/pay/wx/h5', true, 'post', data)
@@ -753,6 +756,9 @@ module.exports = {
   },
   mapDistance: (lat1, lng1, lat2, lng2) => {
     return request('/common/map/distance', false, 'get', { lat1, lng1, lat2, lng2 })
+  },
+  mapDistanceNavigation: (key, mode, from, to) => {
+    return request('/common/map/qq/distance', false, 'post', { key, mode, from, to })
   },
   mapQQAddress: (location = '', coord_type = '5') => {
     return request('/common/map/qq/address', false, 'get', { location, coord_type })
