@@ -186,6 +186,9 @@ module.exports = {
   payVariableUrl: (url, data) => {
     return request(url, true, 'post', data)
   },
+  wxpay: (data) => {
+    return request('/pay/wx/wxapp', true, 'post', data)
+  },
   wxpayH5: (data) => {
     return request('/pay/wx/h5', true, 'post', data)
   },
@@ -194,6 +197,42 @@ module.exports = {
   },
   wxpayQrcode: (data) => {
     return request('/pay/wx/qrcode', true, 'post', data)
+  },
+  wxpayFOMO: (data) => {
+    return request('/pay/fomo/wxapp', true, 'post', data)
+  },
+  payNow: (data) => {
+    return request('/pay/fomo/payNow', true, 'post', data)
+  },
+  fomoCheckout: (data) => {
+    return request('/pay/fomo/checkout', true, 'post', data)
+  },
+  wxpayFWS: (data) => {
+    return request('/pay/wxfws/wxapp', true, 'post', data)
+  },
+  ttpay: (data) => {
+    return request('/pay/tt/microapp', true, 'post', data)
+  },
+  payQuery: (token, outTradeId) => {
+    return request('/pay/query', true, 'get', { token, outTradeId })
+  },
+  wxpaySaobei: (data) => {
+    return request('/pay/lcsw/wxapp', true, 'post', data)
+  },
+  wxpayWepayez: (data) => {
+    return request('/pay/wepayez/wxapp', true, 'post', data)
+  },
+  wxpayxpert: (data) => {
+    return request('/pay/payxpert/wxapp', true, 'post', data)
+  },
+  wxpayIPaynow: (data) => {
+    return request('/pay/ipaynow/wxapp', true, 'post', data)
+  },
+  wxpayAirwallex: (data) => {
+    return request('/pay/airwallex/wxapp', true, 'post', data)
+  },
+  paypalCheckout: (data) => {
+    return request('/pay/paypal/checkout', true, 'post', data)
   },
   alipay: (data) => {
     return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data)
@@ -248,8 +287,14 @@ module.exports = {
   goodsCategory: () => {
     return request('/shop/goods/category/all', true, 'get')
   },
+  goodsCategoryDetail: (id) => {
+    return request('/shop/goods/category/info', true, 'get', { id })
+  },
   goods: (data) => {
     return request('/shop/goods/list', true, 'post', data)
+  },
+  goodsv2: (data) => {
+    return request('/shop/goods/list/v2', true, 'post', data)
   },
   goodsDetail: (id) => {
     return request('/shop/goods/detail', true, 'get', {
@@ -702,6 +747,12 @@ module.exports = {
   modifyUserInfo: (data) => {
     return request('/user/modify', true, 'post', data)
   },
+  bindSaleman: data => {
+    return request('/user/bindSaleman', true, 'post', data)
+  },
+  modifyUserPassword: (token, pwdOld, pwdNew) => {
+    return request('/user/modify/password', true, 'post', { token, pwdOld, pwdNew })
+  },
   uniqueId: (type = '') => {
     return request('/uniqueId/get', true, 'get', { type })
   },
@@ -954,6 +1005,106 @@ module.exports = {
   },
   wxOpenAuthorization: (data) => {
     return request('/user/wxsns/authorization', true, 'post', data)
+  },
+  userAttentioncheck: (token, uid) => {
+    return request('/user/attention/check', true, 'get', {
+      token, uid
+    })
+  },
+  userAttentionAdd: (token, uid) => {
+    return request('/user/attention/add', true, 'post', {
+      token, uid
+    })
+  },
+  userAttentionRemove: (token, uid) => {
+    return request('/user/attention/remove', true, 'post', {
+      token, uid
+    })
+  },
+  userAttentionMeList: (data) => {
+    return request('/user/attention/attention-me', true, 'post', data)
+  },
+  userMyAttentionList: (data) => {
+    return request('/user/attention/my-attention', true, 'post', data)
+  },
+  userAttentionDetail: (token, uid) => {
+    return request('/user/attention/detail', true, 'get', {
+      token, uid
+    })
+  },
+  userAttentionStatistics: (token) => {
+    return request('/user/attention/statistics', true, 'get', {
+      token
+    })
+  },
+  cyTableToken: (tableId, key) => {
+    return request('/cyTable/token', true, 'post', {
+      id: tableId,
+      k: key
+    })
+  },
+  cyTableAddOrder: data => {
+    return request('/cyTable/add-order', true, 'post', data)
+  },
+  cyTablePayOrder: data => {
+    return request('/cyTable/pay-order', true, 'post', data)
+  },
+  goodsTimesSchedule: (goodsId = '', propertyChildIds = '', brandId = '', categoryId = '') => {
+    return request('/shop/goods/times/schedule', true, 'post', { goodsId, propertyChildIds, brandId, categoryId })
+  },
+  goodsTimesDays: (goodsId, propertyChildIds = '') => {
+    return request('/shop/goods/times/days', true, 'post', { goodsId, propertyChildIds })
+  },
+  goodsTimesDayItems: (day, goodsId, propertyChildIds = '') => {
+    return request('/shop/goods/times/items', true, 'post', { day, goodsId, propertyChildIds })
+  },
+  goodsBrandList: data => {
+    return request('/shop/goods/brand/list', true, 'post', data)
+  },
+  goodsBrandDetail: id => {
+    return request('/shop/goods/brand/detail', true, 'get', { id })
+  },
+  wxappServiceLogin: data => {
+    return request('/user/wxappService/login', true, 'post', data)
+  },
+  wxappServiceLoginWxaMobile: data => {
+    return request('/user/wxappService/login/mobile', true, 'post', data)
+  },
+  wxappServiceRegisterComplex: data => {
+    return request('/user/wxappService/register/complex', true, 'post', data)
+  },
+  wxappServiceRegisterSimple: data => {
+    return request('/user/wxappService/register/simple', true, 'post', data)
+  },
+  wxappServiceAuthorize: data => {
+    return request('/user/wxappService/authorize', true, 'post', data)
+  },
+  wxappServiceBindMobile: data => {
+    return request('/user/wxappService/bindMobile', true, 'post', data)
+  },
+  wxappServiceBindOpenid: data => {
+    return request('/user/wxappService/bindOpenid', true, 'post', data)
+  },
+  wxappServiceEncryptedData: data => {
+    return request('/user/wxappService/decode/encryptedData', true, 'post', data)
+  },
+  trtcUserSig: token => {
+    return request('/trtc/userSig', true, 'get', { token })
+  },
+  setPayPassword: (token, pwd) => {
+    return request('/user/paypwd/set', true, 'post', { token, pwd })
+  },
+  modifyPayPassword: (token, pwdOld, pwdNew) => {
+    return request('/user/paypwd/modify', true, 'post', { token, pwdOld, pwdNew })
+  },
+  resetPayPassword: (mobile, code, pwd) => {
+    return request('/user/paypwd/reset', true, 'post', { mobile, code, pwd })
+  },
+  adPosition: key => {
+    return request('/site/adPosition/info', true, 'get', { key })
+  },
+  adPositionBatch: keys => {
+    return request('/site/adPosition/batch', true, 'get', { keys })
   },
   momentsCategory: () => {
     return request('/momentsCategory/list', true, 'get')
