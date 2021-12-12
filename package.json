@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "1.45.0",
-  "description": "增加秒杀占位方法",
+  "version": "1.47.0",
+  "description": "增加SDK方法",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
