@@ -1260,4 +1260,222 @@ module.exports = {
       token
     })
   },
+  // 商家从区管进货
+  jdvopJinhuoGoods: data => {
+    return request('/vop/goods/list', true, 'post', data)
+  },
+  jdvopJinhuoGoodsDetail: (token, skuId) => {
+    return request('/vop/goods/detail', true, 'get', { token, skuId })
+  },
+  // cps
+  cpsJdGoodsCategory: (parentId, grade) => {
+    return request('/cpsJdGoods/category', true, 'get', { parentId, grade })
+  },
+  cpsJdGoodsSearch: data => {
+    return request('/cpsJdGoods/search', true, 'post', data)
+  },
+  cpsJdGoodsDetail: data => {
+    return request('/cpsJdGoods/detail', true, 'get', data)
+  },
+  cpsJdGoodsSetExt: data => {
+    return request('/cpsJdGoods/ext/set', true, 'post', data)
+  },
+  cpsJdGoodsQueryExt: skuId => {
+    return request('/cpsJdGoods/ext/query', true, 'get', { skuId })
+  },
+  cpsJdGoodsShotUrl: (token, skuId) => {
+    return request('/cpsJdGoods/shotUrl', true, 'get', { token, skuId })
+  },
+  cpsJdGoodsShotUrlSite: (token, materialUrl, couponUrl) => {
+    return request('/cpsJdGoods/shotUrl/site', true, 'post', { token, materialUrl, couponUrl })
+  },
+  cpsJdOrders: data => {
+    return request('/cpsJdOrder/list', true, 'post', data)
+  },
+  cpsJdOrderDetail: (token, id) => {
+    return request('/cpsJdOrder/detail', true, 'get', { token, id })
+  },
+  cpsPddBeian: token => {
+    return request('/cpsPddGoods/beian', true, 'get', { token })
+  },
+  cpsPddGoodsDetail: data => {
+    return request('/cpsPddGoods/detail', true, 'get', data)
+  },
+  cpsPddGoodsShotUrl: (token, goodsSign) => {
+    return request('/cpsPddGoods/shotUrl', true, 'get', { token, goodsSign })
+  },
+  cpsPddOrders: data => {
+    return request('/cpsPddOrder/list', true, 'post', data)
+  },
+  cpsPddOrderDetail: (token, id) => {
+    return request('/cpsPddOrder/detail', true, 'get', { token, id })
+  },
+  cpsTaobaoGoodsDetail: data => {
+    return request('/cpsTaobaoGoods/detail', true, 'get', data)
+  },
+  cpsTaobaoGoodsShotUrl: (token, content) => {
+    return request('/cpsTaobaoGoods/shotUrl', true, 'post', { token, content })
+  },
+  cpsTaobaoGoodsKouling: (token, content) => {
+    return request('/cpsTaobaoGoods/kouling', true, 'post', { token, content })
+  },
+  // 回收
+  recycleOrders: data => {
+    return request('/recycleOrder/list', true, 'post', data)
+  },
+  recycleOrderApply: data => {
+    return request('/recycleOrder/apply', true, 'post', data)
+  },
+  recycleOrderDetail: (token, id) => {
+    return request('/recycleOrder/detail', true, 'get', { token, id })
+  },
+  recycleOrderFahuo: data => {
+    return request('/recycleOrder/fahuo', true, 'post', data)
+  },
+  recycleOrderClose: (token, id) => {
+    return request('/recycleOrder/close', true, 'post', { token, id })
+  },
+  recycleOrderDelete: (token, id) => {
+    return request('/recycleOrder/del', true, 'post', { token, id })
+  },
+  // 会员卡
+  cardList: data => {
+    return request('/card/list', true, 'post', data)
+  },
+  cardInfo: id => {
+    return request('/card/info', true, 'get', { id })
+  },
+  cardBuy: (token, id) => {
+    return request('/card/buy', true, 'post', { token, id })
+  },
+  cardMyList: token => {
+    return request('/card/my', true, 'get', { token })
+  },
+  cardMyLogs: data => {
+    return request('/card/logs', true, 'post', data)
+  },
+  // 收藏卡片
+  collectCardHis: data => {
+    return request('/collectCard/del', true, 'post', data)
+  },
+  collectCardInfo: (number) => {
+    return request('/collectCard/cardInfo', true, 'get', { number })
+  },
+  collectCardHisInfo: (token, id) => {
+    return request('/collectCard/hisInfo', true, 'get', { token, id })
+  },
+  collectCardBind: data => {
+    return request('/collectCard/bind', true, 'post', data)
+  },
+  collectCardUnBind: (token, id, smsCode) => {
+    return request('/collectCard/bind', true, 'post', { token, id, smsCode })
+  },
+  // 其他
+  bengenSaleTongjiList: data => {
+    return request('/bengenSaleTongji/list', true, 'post', data)
+  },
+  bengenSaleTongjiRank: data => {
+    return request('/bengenSaleTongji/rank', true, 'get', data)
+  },
+  // 购买课程
+  courseInfoList: data => {
+    return request('/courseInfo/list', true, 'post', data)
+  },
+  courseInfo: id => {
+    return request('/courseInfo/info', true, 'get', { id })
+  },
+  courseBuyLogPublic: data => {
+    return request('/courseBuyLog/public', true, 'post', data)
+  },
+  courseBuyLogMy: data => {
+    return request('/courseBuyLog/my', true, 'post', data)
+  },
+  courseInfoBuy: data => {
+    return request('/courseBuyLog/buy', true, 'post', data)
+  },
+  courseInfoBuyLogPay: (token, orderId) => {
+    return request('/courseBuyLog/pay', true, 'post', { token, orderId })
+  },
+  courseInfoBuyLogDetail: (token, id, hxNumber = '') => {
+    return request('/courseBuyLog/detail', true, 'get', { token, id, hxNumber })
+  },
+  courseInfoBuyLogClose: (token, orderId) => {
+    return request('/courseBuyLog/close', true, 'post', { token, orderId })
+  },
+  courseInfoBuyLogDelete: (token, orderId) => {
+    return request('/courseBuyLog/del', true, 'post', { token, orderId })
+  },
+  // 橱窗
+  chuchuanSettingInfo: uid => {
+    return request('/chuchuan/info', true, 'get', { uid })
+  },
+  chuchuanSettingModify: data => {
+    return request('/chuchuan/modify', true, 'post', data)
+  },
+  chuchuanGoodsList: data => {
+    return request('/chuchuanGoods/list', true, 'post', data)
+  },
+  chuchuanGoodsAdd: data => {
+    return request('/chuchuanGoods/add', true, 'post', data)
+  },
+  chuchuanGoodsRemove: (token, goodsId) => {
+    return request('/chuchuanGoods/remove', true, 'post', { token, goodsId })
+  },
+  chuchuanGoodsCheck: (token, goodsId) => {
+    return request('/chuchuanGoods/check', true, 'get', { token, goodsId })
+  },
+  // 寄存
+  jicunGoodsList: data => {
+    return request('/jicunGoods/list', true, 'post', data)
+  },
+  jicunGoodsDetail: data => {
+    return request('/jicunGoods/detail', true, 'get', data)
+  },
+  // ocr
+  ocrBusinessLicense: imageUrl => {
+    return request('/ocr/businessLicense', true, 'post', { imageUrl })
+  },
+  ocrIdcard: imageUrl => {
+    return request('/ocr/idcard', true, 'post', { imageUrl })
+  },
+  ocrBankcard: imageUrl => {
+    return request('/ocr/bankcard', true, 'post', { imageUrl })
+  },
+  ocrDriverLicense: imageUrl => {
+    return request('/ocr/driverLicense', true, 'post', { imageUrl })
+  },
+  // 朋友圈
+  momentsPublish: data => {
+    return request('/user/moments/publish', true, 'post', data)
+  },
+  momentsList: data => {
+    return request('/user/moments/list', true, 'get', data)
+  },
+  momentsDetail: (token, momentsId) => {
+    return request('/user/moments/detail', true, 'get', { token, momentsId })
+  },
+  momentsDelete: (token, momentsId) => {
+    return request('/user/moments/del', true, 'post', { token, momentsId })
+  },
+  momentsDeleteComment: (token, commentId) => {
+    return request('/user/moments/delCommon', true, 'post', { token, commentId })
+  },
+  momentsLike: (token, momentsId) => {
+    return request('/user/moments/like', true, 'post', { token, momentsId })
+  },
+  momentsComment: (token, momentsId, uid = '', content) => {
+    return request('/user/moments/comment', true, 'post', { token, momentsId, uid, content })
+  },
+  momentsCommentLogs: data => {
+    return request('/user/moments/logs', true, 'get', data)
+  },
+  momentsLogsRead: (token, logsIds) => {
+    return request('/user/moments/logRead', true, 'post', { token, logsIds })
+  },
+  bottleMsgPublish: data => {
+    return request('/bottleMsg/publish', true, 'post', data)
+  },
+  bottleMsgSalvage: token => {
+    return request('/bottleMsg/salvage', true, 'get', { token })
+  },
 }
