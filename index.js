@@ -603,6 +603,9 @@ module.exports = {
   fxApply: (token, name, mobile) => {
     return request('/saleDistribution/apply', true, 'post', { token, name, mobile })
   },
+  fxApplyV2: data => {
+    return request('/saleDistribution/apply/v2', true, 'post', data)
+  },
   fxBuy: token => {
     return request('/saleDistribution/buy', true, 'post', { token })
   },
@@ -633,6 +636,21 @@ module.exports = {
   },
   fxMembersStatistics: token => {
     return request('/saleDistribution/members/statistics', true, 'get', { token })
+  },
+  fxMyCommisionStatistics: (token, days) => {
+    return request('/saleDistribution/my/commision', true, 'get', { token, days })
+  },
+  fxGoods: data => {
+    return request('/saleDistribution/goods', true, 'post', data)
+  },
+  fxTeamReport: data => {
+    return request('/saleDistribution/team/report', true, 'post', data)
+  },
+  fxCities: token => {
+    return request('/saleDistribution/city/list', true, 'get', { token })
+  },
+  fxCityReport: data => {
+    return request('/saleDistribution/city/report', true, 'post', data)
   },
   goodsSellNumberStatistics: (page, pageSize, goodsId = '') => {
     return request('/site/goods/statistics', true, 'get', {
