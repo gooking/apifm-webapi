@@ -87,6 +87,9 @@ module.exports = {
   nextMobileSegment: (data) => {
     return request('/common/mobile-segment/next', false, 'post', data)
   },
+  forexRate: (fromCode, toCode) => {
+    return request('/forex/rate', true, 'get', { fromCode, toCode })
+  },
   queryConfigValue: (key) => {
     return request('/config/value', true, 'get', { key })
   },
