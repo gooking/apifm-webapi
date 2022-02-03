@@ -1519,4 +1519,13 @@ module.exports = {
   bottleMsgSalvage: token => {
     return request('/bottleMsg/salvage', true, 'get', { token })
   },
+  userInvoiceInfo: token => {
+    return request('/userInvoice/info', true, 'get', { token })
+  },
+  userInvoiceUnbind: token => {
+    return request('/userInvoice/unbind', true, 'post', { token })
+  },
+  userInvoiceBind: data => {
+    return request('/userInvoice/bind', true, 'post', data)
+  },
 }
