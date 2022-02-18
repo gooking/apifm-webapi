@@ -296,6 +296,9 @@ module.exports = {
   goodsCategory: () => {
     return request('/shop/goods/category/all', true, 'get')
   },
+  goodsCategoryV2: (shopId = '') => {
+    return request('/shop/goods/category/all', true, 'get', { shopId })
+  },
   goodsCategoryDetail: (id) => {
     return request('/shop/goods/category/info', true, 'get', { id })
   },
@@ -637,6 +640,11 @@ module.exports = {
   },
   fxSaleroomRankTotal: (page, pageSize) => {
     return request('/saleDistribution/sale-room-rank/total', true, 'get', {
+      page, pageSize
+    })
+  },
+  fxSaleroomRankTotalTeam: (page, pageSize) => {
+    return request('/saleDistribution/sale-room-rank/team/total', true, 'get', {
       page, pageSize
     })
   },
@@ -1007,6 +1015,12 @@ module.exports = {
     return request('/user/email/bindUsername', true, 'post', {
       token, email, code, pwd
     })
+  },
+  goodsDynamic: (type) => {
+    return request('/site/goods/dynamic', true, 'get', { type })
+  },
+  goodsDynamicV2: data => {
+    return request('/site/goods/dynamic', true, 'get', data)
   },
   shippingCarInfo: (token) => {
     return request('/shopping-cart/info', true, 'get', {
