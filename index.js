@@ -243,6 +243,9 @@ module.exports = {
   alipay: (data) => {
     return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data)
   },
+  alipayMP: (data) => {
+    return request('/pay/alipay/gate/mp', true, 'post', data)
+  },
   alipayAPP: (data) => {
     return request('/pay/alipay/gate/app', true, 'post', data)
   },
@@ -1553,5 +1556,11 @@ module.exports = {
   },
   userInvoiceBind: data => {
     return request('/userInvoice/bind', true, 'post', data)
+  },
+  tempDataSet: (key, content) => {
+    return request('/tempData/set', true, 'post', { key, content })
+  },
+  tempDataGet: key => {
+    return request('/tempData/get', true, 'post', { key })
   },
 }
