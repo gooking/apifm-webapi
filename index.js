@@ -377,8 +377,8 @@ module.exports = {
   goodsFavDeleteV2: data => {
     return request('/shop/goods/fav/delete', true, 'post', data)
   },
-  goodsSeckillGrab: (goodsId, seconds) => {
-    return request('/goods/seckill/grab', false, 'post', { goodsId, seconds })
+  goodsSeckillGrab: (token, goodsId, seconds) => {
+    return request('/goods/seckill/grab', true, 'post', { token, goodsId, seconds })
   },
   coupons: (data) => {
     return request('/discounts/coupons', true, 'get', data)
@@ -513,6 +513,11 @@ module.exports = {
   },
   userWxinfo: (token) => {
     return request('/user/wxinfo', true, 'get', {
+      token
+    })
+  },
+  userAliappInfo: (token) => {
+    return request('/user/aliappInfo', true, 'get', {
       token
     })
   },
@@ -753,6 +758,9 @@ module.exports = {
   },
   cmsArticleDetail: (id) => {
     return request('/cms/news/detail', true, 'get', { id })
+  },
+  cmsArticleDetailV2: (id, token = '') => {
+    return request('/cms/news/detail/v2', true, 'get', { id, token })
   },
   cmsArticlePreNext: (id) => {
     return request('/cms/news/preNext', true, 'get', { id })
@@ -1066,6 +1074,12 @@ module.exports = {
     return request('/user/qqconnect/authorization', true, 'get', {
       code
     })
+  },
+  registerQ: (data) => {
+    return request('/user/q/register', true, 'post', data)
+  },
+  qqAuthorize: (data) => {
+    return request('/user/q/authorize', true, 'post', data)
   },
   siteStatistics: () => {
     return request('/site/statistics', true, 'get')
@@ -1561,6 +1575,9 @@ module.exports = {
     return request('/tempData/set', true, 'post', { key, content })
   },
   tempDataGet: key => {
-    return request('/tempData/get', true, 'post', { key })
+    return request('/tempData/get', true, 'get', { key })
+  },
+  commonDatetime: () => {
+    return request('/common/datetime', true, 'get')
   },
 }
