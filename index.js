@@ -462,11 +462,17 @@ module.exports = {
       goodsId: goodsIdArray.join()
     })
   },
-  pingtuanOpen: (token, goodsId) => {
+  pingtuanOpen: (token, goodsId, extJsonStr = '') => {
     return request('/shop/goods/pingtuan/open', true, 'post', {
       goodsId,
-      token
+      token,
+      extJsonStr
     })
+  },
+  pingtuanTuanInfo: (tuanId) => {
+    return request('/shop/goods/pingtuan/tuanInfo', true, 'get', {
+      tuanId
+    });
   },
   pingtuanList: (data) => {
     return request('/shop/goods/pingtuan/list/v2', true, 'post', data)
@@ -1081,6 +1087,9 @@ module.exports = {
   qqAuthorize: (data) => {
     return request('/user/q/authorize', true, 'post', data)
   },
+  qqQrcode: (content) => {
+    return request('/user/q/qrcode', true, 'post', { content })
+  },
   siteStatistics: () => {
     return request('/site/statistics', true, 'get')
   },
@@ -1579,5 +1588,18 @@ module.exports = {
   },
   commonDatetime: () => {
     return request('/common/datetime', true, 'get')
+  },
+  // 支付宝小程序
+  aliappUserRegister: data => {
+    return request('/user/aliapp/register', true, 'post', data)
+  },
+  aliappUserLogin: data => {
+    return request('/user/aliapp/login', true, 'post', data)
+  },
+  aliappUserAuthorize: data => {
+    return request('/user/aliapp/authorize', true, 'post', data)
+  },
+  aliappQrcode: content => {
+    return request('/user/aliapp/qrcode', true, 'post', { content })
   },
 }
