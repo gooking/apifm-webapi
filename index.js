@@ -201,6 +201,9 @@ module.exports = {
   wxpayQrcode: (data) => {
     return request('/pay/wx/qrcode', true, 'post', data)
   },
+  wxpayApp: data => {
+    return request('/pay/wx/app', true, 'post', data);
+  },
   wxpayFOMO: (data) => {
     return request('/pay/fomo/wxapp', true, 'post', data)
   },
@@ -254,6 +257,30 @@ module.exports = {
       code,
       type: 2
     })
+  },
+  login_tt: (code) => {
+    return request('/user/tt/microapp/login', true, 'post', {
+      code
+    })
+  },
+  login_q: (code) => {
+    return request('/user/q/login', true, 'post', {
+      code,
+      type: 2
+    })
+  },
+  loginWxaMobile: (code, encryptedData, iv) => {
+    return request('/user/wxapp/login/mobile', true, 'post', {
+      code,
+      encryptedData,
+      iv
+    })
+  },
+  loginWxaMobileV2: data => {
+    return request('/user/wxapp/login/mobile', true, 'post', data)
+  },
+  fetchWxaMobile: (code) => {
+    return request('/user/wxapp/getMobile', true, 'get', { code })
   },
   login_username: (data) => {
     return request('/user/username/login', true, 'post', data)
@@ -352,6 +379,9 @@ module.exports = {
   },
   goodsFavList: data => {
     return request('/shop/goods/fav/list', true, 'post', data)
+  },
+  goodsFavListV2: data => {
+    return request('/shop/goods/fav/list/v2', true, 'post', data)
   },
   goodsFavPut: (token, goodsId) => {
     return request('/shop/goods/fav/add', true, 'post', {
@@ -553,6 +583,9 @@ module.exports = {
   orderReputation: (data) => {
     return request('/order/reputation', true, 'post', data)
   },
+  orderReputationList: (data) => {
+    return request('/order/listReputation', true, 'post', data)
+  },
   orderClose: (token, orderId) => {
     return request('/order/close', true, 'post', {
       orderId,
@@ -617,6 +650,11 @@ module.exports = {
   nextRegion: (pid) => {
     return request('/common/region/v2/child', false, 'get', {
       pid
+    })
+  },
+  regionInfo: (id) => {
+    return request('/common/region/v2/info', false, 'get', {
+      id
     })
   },
   cashLogs: (data) => {
@@ -786,6 +824,18 @@ module.exports = {
   cmsTags: () => {
     return request('/cms/tags/list', true, 'get', {  })
   },
+  cmsNewsSignUsers: (data) => {
+    return request('/newsSign/signUsers', true, 'post', data)
+  },
+  cmsNewsSignOnline: (data) => {
+    return request('/newsSign/signOnline', true, 'post', data)
+  },
+  cmsNewsSignOffline: (data) => {
+    return request('/newsSign/signOffline', true, 'post', data)
+  },
+  cmsNewsSignCheck: (token, newsId) => {
+    return request('/newsSign/check', true, 'get', { token, newsId })
+  },
   invoiceList: (data) => {
     return request('/invoice/list', true, 'post', data)
   },
@@ -825,11 +875,50 @@ module.exports = {
   shopSubdetail: (id) => {
     return request('/shop/subshop/detail/v2', true, 'get', { id })
   },
+  shopSubApply: (data) => {
+    return request('/shop/subshop/apply', true, 'post', data)
+  },
+  pickPoints: (data) => {
+    return request('/shop/subshop/pickPoints', true, 'post', data)
+  },
+  shopReputationList: (data) => {
+    return request('/shop/subshop/listReputation', true, 'post', data)
+  },
+  shopFavPut: (token, shopId) => {
+    return request('/shop/fav/add', true, 'post', { token, shopId })
+  },
+  shopFavCheck: (token, shopId) => {
+    return request('/shop/fav/check', true, 'get', { token, shopId })
+  },
+  shopFavList: (data) => {
+    return request('/shop/fav/list', true, 'post', data)
+  },
+  shopFavDelete: (token, shopId) => {
+    return request('/shop/fav/delete', true, 'post', { token, shopId })
+  },
+  userAttendantFavPut: (token, attendantId) => {
+    return request('/userAttendantFav/add', true, 'post', { token, attendantId })
+  },
+  userAttendantFavCheck: (token, attendantId) => {
+    return request('/userAttendantFav/check', true, 'get', { token, attendantId })
+  },
+  userAttendantFavList: (data) => {
+    return request('/userAttendantFav/list', true, 'post', data)
+  },
+  userAttendantFavDelete: (token, attendantId) => {
+    return request('/userAttendantFav/delete', true, 'post', { token, attendantId })
+  },
   addComment: (data) => {
     return request('/comment/add', true, 'post', data)
   },
   commentList: (data) => {
     return request('/comment/list', true, 'post', data)
+  },
+  commentListV2: (data) => {
+    return request('/comment/list/v2', true, 'post', data)
+  },
+  delComment: (data) => {
+    return request('/comment/del', true, 'post', data)
   },
   modifyUserInfo: (data) => {
     return request('/user/modify', true, 'post', data)
@@ -901,6 +990,9 @@ module.exports = {
   mapQQAddress: (location = '', coord_type = '5') => {
     return request('/common/map/qq/address', false, 'get', { location, coord_type })
   },
+  mapQQAddressV2: (key, location, coord_type = '5') => {
+    return request('/common/map/qq/address', false, 'get', { key, location, coord_type })
+  },
   mapQQSearch: (data) => {
     return request('/common/map/qq/search', false, 'post', data)
   },
@@ -930,6 +1022,9 @@ module.exports = {
   },
   loginout: (token) => {
     return request('/user/loginout', true, 'get', { token })
+  },
+  userDelete: (token) => {
+    return request('/user/delete', true, 'post', { token })
   },
   userLevelList: (data) => {
     return request('/user/level/list', true, 'post', data)
@@ -987,6 +1082,9 @@ module.exports = {
       remark
     })
   },
+  voteCategory: (data) => {
+    return request('/vote/vote/category', true, 'post', data)
+  },
   myVote: (token, voteId) => {
     return request('/vote/vote/info', true, 'get', {
       token, voteId,
@@ -994,6 +1092,15 @@ module.exports = {
   },
   voteLogs: (data) => {
     return request('/vote/vote/list', true, 'post', data)
+  },
+  voteGroups: (data) => {
+    return request('/vote/vote/groups', true, 'post', data)
+  },
+  voteGroupsDetail: (data) => {
+    return request('/vote/vote/groups/detail', true, 'get', data)
+  },
+  myInviteVoteJoinList: (data) => {
+    return request('/vote/myInviteLoinList', true, 'post', data)
   },
   yuyueItems: (data) => {
     return request('/yuyue/items', true, 'post', data)
@@ -1012,6 +1119,11 @@ module.exports = {
   yuyueJoinUpdate: (token, joinId, extJsonStr) => {
     return request('/yuyue/join/update', true, 'post', {
       token, joinId, extJsonStr
+    })
+  },
+  yuyueJoinDelete: (token, joinId) => {
+    return request('/yuyue/delJoin', true, 'post', {
+      token, id: joinId
     })
   },
   yuyueMyJoinInfo: (token, joinId) => {
@@ -1184,6 +1296,9 @@ module.exports = {
   wxappServiceBindMobile: data => {
     return request('/user/wxappService/bindMobile', true, 'post', data)
   },
+  wxappServiceBindMobileV2: data => {
+    return request('/user/wxappService/bindMobile/v2', true, 'post', data)
+  },
   wxappServiceBindOpenid: data => {
     return request('/user/wxappService/bindOpenid', true, 'post', data)
   },
@@ -1244,6 +1359,51 @@ module.exports = {
   wxaMpLiveRoomHisVedios: (roomId) => {
     return request('/wx/live/his', true, 'get', {
       roomId
+    })
+  },
+  peisonFeeList: () => {
+    return request('/fee/peisong/list', true, 'get')
+  },
+  peisongMembers: (data) => {
+    return request('/peisong/member/list', true, 'post', data)
+  },
+  peisongMemberInfo: (token) => {
+    return request('/peisong/member/info', true, 'get', {
+      token
+    })
+  },
+  peisongMemberChangeWorkStatus: (token) => {
+    return request('/peisong/member/change-work-status', true, 'post', {
+      token
+    })
+  },
+  peisongOrdersGrabbing: (token) => {
+    return request('/peisong/order/grabbing', true, 'get', { token })
+  },
+  peisongOrders: (data) => {
+    return request('/peisong/order/list', true, 'post', data)
+  },
+  peisongOrderGrab: (data) => {
+    return request('/peisong/order/grab', true, 'post', data)
+  },
+  peisongOrderDetail: (token, id) => {
+    return request('/peisong/order/detail', true, 'get', { token, id })
+  },
+  peisongOrderEstimatedCompletionTime: (data) => {
+    return request('/peisong/order/estimatedCompletionTime', true, 'post', data)
+  },
+  peisongStartService: (data) => {
+    return request('/peisong/order/start-service', true, 'post', data)
+  },
+  peisongEndService: (data) => {
+    return request('/peisong/order/end-service', true, 'post', data)
+  },
+  peisongEndServiceRemark: (token, id, remarkEnd) => {
+    return request('/peisong/order/end-service/remarkEnd', true, 'post', { token, id, remarkEnd })
+  },
+  peisongOrderAllocation: (token, id, uid) => {
+    return request('/peisong/order/allocation', true, 'post', {
+      token, id, uid
     })
   },
   // 京东联盟相关接口
@@ -1541,7 +1701,7 @@ module.exports = {
   momentsPublish: data => {
     return request('/user/moments/publish', true, 'post', data)
   },
-  momentsList: data => {
+  userMomentsList: data => {
     return request('/user/moments/list', true, 'get', data)
   },
   momentsDetail: (token, momentsId) => {
@@ -1589,6 +1749,9 @@ module.exports = {
   commonDatetime: () => {
     return request('/common/datetime', true, 'get')
   },
+  commonDays: (startDay = '', days = '') => {
+    return request('/common/days', false, 'get', { startDay, days })
+  },
   // 支付宝小程序
   aliappUserRegister: data => {
     return request('/user/aliapp/register', true, 'post', data)
@@ -1599,7 +1762,25 @@ module.exports = {
   aliappUserAuthorize: data => {
     return request('/user/aliapp/authorize', true, 'post', data)
   },
+  aliappWebUserAuthorize: data => {
+    return request('/user/aliappweb/authorize', true, 'post', data)
+  },
   aliappQrcode: content => {
     return request('/user/aliapp/qrcode', true, 'post', { content })
+  },
+  userAttendantList: data => {
+    return request('/user/attendant/list', true, 'post', data)
+  },
+  userAttendantDetail: (id, token = '') => {
+    return request('/user/attendant/detail', true, 'get', { id, token })
+  },
+  userAttendantGoods: (id) => {
+    return request('/user/attendant/goods', true, 'get', { id })
+  },
+  shopCategory: () => {
+    return request('/shopCategory/all', true, 'get')
+  },
+  shopCategoryDetail: (id) => {
+    return request('/shopCategory/info', true, 'get', { id })
   },
 }
