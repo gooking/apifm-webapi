@@ -131,6 +131,12 @@ module.exports = {
       iv
     })
   },
+  scoreTaskList: token => {
+    return request('/score/taskList', true, 'get', { token })
+  },
+  scoreTaskSuccess: (token, type) => {
+    return request('/score/taskSuccess', true, 'post', { token, type })
+  },
   kanjiaSet: (goodsId) => {
     return request('/shop/goods/kanjia/set', true, 'get', { goodsId })
   },
@@ -201,6 +207,9 @@ module.exports = {
   wxpayQrcode: (data) => {
     return request('/pay/wx/qrcode', true, 'post', data)
   },
+  wxpayCode: data => {
+    return request('/pay/wx/paymentCode', true, 'post', data)
+  },
   wxpayApp: data => {
     return request('/pay/wx/app', true, 'post', data);
   },
@@ -251,6 +260,12 @@ module.exports = {
   },
   alipayAPP: (data) => {
     return request('/pay/alipay/gate/app', true, 'post', data)
+  },
+  alipayQrcode: (data) => {
+    return request('/pay/alipay/gate/qrcode', true, 'post', data)
+  },
+  alipayQrcode2: (data) => {
+    return request('/pay/alipay/gate/paymentCode', true, 'post', data)
   },
   login_wx: (code) => {
     return request('/user/wxapp/login', true, 'post', {
@@ -341,9 +356,9 @@ module.exports = {
   goodsv2: (data) => {
     return request('/shop/goods/list/v2', true, 'post', data)
   },
-  goodsDetail: (id) => {
+  goodsDetail: (id, token = '') => {
     return request('/shop/goods/detail', true, 'get', {
-      id
+      id, token
     })
   },
   goodsLimitations: (goodsId, priceId = '') => {
@@ -354,6 +369,21 @@ module.exports = {
   goodsLimitationsV2: (goodsId, propertyChildIds = '') => {
     return request('/shop/goods/limitation', true, 'get', {
       goodsId, propertyChildIds
+    })
+  },
+  goodsAddition: (goodsId) => {
+    return request('/shop/goods/goodsAddition', true, 'get', {
+      goodsId
+    })
+  },
+  goodsVideoEpisodesList: (goodsId, token = '') => {
+    return request('/goodsVideoEpisodes/list', true, 'get', {
+      goodsId, token
+    })
+  },
+  goodsVideoEpisodesBuy: (goodsId, number, token) => {
+    return request('/goodsVideoEpisodes/buy', true, 'post', {
+      goodsId, number, token
     })
   },
   goodsPrice: (goodsId, propertyChildIds) => {
@@ -770,6 +800,9 @@ module.exports = {
   uploadFileList: (path = '') => {
     return request('/dfs/upload/list', true, 'post', { path })
   },
+  galleryList: data => {
+    return request('/dfs/gallery', true, 'post', data)
+  },
   refundApply: (data) => {
     return request('/order/refundApply/apply', true, 'post', data)
   },
@@ -1025,6 +1058,9 @@ module.exports = {
   },
   userDelete: (token) => {
     return request('/user/delete', true, 'post', { token })
+  },
+  dynamicUserCode: (token) => {
+    return request('/user/dynamicUserCode', true, 'get', { token })
   },
   userLevelList: (data) => {
     return request('/user/level/list', true, 'post', data)
@@ -1593,7 +1629,7 @@ module.exports = {
   },
   // 会员卡
   cardList: data => {
-    return request('/card/list', true, 'post', data)
+    return request('/card/list', true, 'get', data)
   },
   cardInfo: id => {
     return request('/card/info', true, 'get', { id })
@@ -1768,6 +1804,61 @@ module.exports = {
   aliappQrcode: content => {
     return request('/user/aliapp/qrcode', true, 'post', { content })
   },
+  // 企业应用 组织/成员/网盘
+  organizePrices: () => {
+    return request('/organizeInfo/prices', true, 'get')
+  },
+  organizeCreate: data => {
+    return request('/organizeInfo/create', true, 'post', data)
+  },
+  organizeUpgrade: data => {
+    return request('/organizeInfo/upgrade', true, 'post', data)
+  },
+  organizeModify: data => {
+    return request('/organizeInfo/modify', true, 'post', data)
+  },
+  organizeJoinKey: data => {
+    return request('/organizeInfo/joinKey', true, 'get', data)
+  },
+  organizeJoin: data => {
+    return request('/organizeInfo/join', true, 'post', data)
+  },
+  organizeGrantAdmin: data => {
+    return request('/organizeInfo/grantAdmin', true, 'post', data)
+  },
+  organizeKick: data => {
+    return request('/organizeInfo/kick', true, 'post', data)
+  },
+  organizeKickAllMembers: data => {
+    return request('/organizeInfo/kickAllMembers', true, 'post', data)
+  },
+  organizeKickSelf: data => {
+    return request('/organizeInfo/kickSelf', true, 'post', data)
+  },
+  organizeNick: data => {
+    return request('/organizeInfo/nick', true, 'post', data)
+  },
+  organizeDelete: data => {
+    return request('/organizeInfo/deleteOrganize', true, 'post', data)
+  },
+  organizeMyOrganizeInfo: data => {
+    return request('/organizeInfo/myOrganizeInfo', true, 'post', data)
+  },
+  organizeDetail: data => {
+    return request('/organizeInfo/organizeDetail', true, 'get', data)
+  },
+  organizeMembers: data => {
+    return request('/organizeInfo/members', true, 'post', data)
+  },
+  newsExtFieldList: (token, organizeId, newsId) => {
+    return request('/newsExtField/extFields', true, 'get', { token, organizeId, newsId })
+  },
+  newsExtFieldDynamic: (token, newsId) => {
+    return request('/newsExtField/dynamic', true, 'get', { token, newsId })
+  },
+  newsExtFieldSet: data => {
+    return request('/newsExtField/setField', true, 'post', data)
+  },
   userAttendantList: data => {
     return request('/user/attendant/list', true, 'post', data)
   },
@@ -1776,6 +1867,39 @@ module.exports = {
   },
   userAttendantGoods: (id) => {
     return request('/user/attendant/goods', true, 'get', { id })
+  },
+  userAttendantGoodsSet: (token, ids) => {
+    return request('/user/attendant/goodsSet', true, 'post', { token, ids })
+  },
+  userAttendantBindShop: (token, shopId) => {
+    return request('/user/attendant/bindShop', true, 'post', { shopId, token })
+  },
+  userAttendantUnBindShop: (token) => {
+    return request('/user/attendant/unbindShop', true, 'post', { token })
+  },
+  userAttendantChangeStatus: data => {
+    return request('/user/attendant/changeStatus', true, 'post', data)
+  },
+  userAttendantDaysTimesAttendant: (goodsId, day) => {
+    return request('/user/attendant/daysTimesAttendant', true, 'get', { goodsId, day })
+  },
+  userAttendantDaysTimesAttendantSetQuery: (token, day) => {
+    return request('/user/attendant/daysTimesAttendant/set/query', true, 'get', { token, day })
+  },
+  userAttendantDaysTimesAttendantSet: data => {
+    return request('/user/attendant/daysTimesAttendant/set', true, 'post', data)
+  },
+  userAttendantListReputation: data => {
+    return request('/user/attendant/listReputation', true, 'post', data)
+  },
+  userAttendantShowPics: id => {
+    return request('/user/attendant/showPics', true, 'get', { id })
+  },
+  userAttendantShowPicsAdd: (token, url) => {
+    return request('/user/attendant/showPicsAdd', true, 'post', { token, url })
+  },
+  userAttendantUpdate: data => {
+    return request('/user/attendant/update', true, 'post', data)
   },
   shopCategory: () => {
     return request('/shopCategory/all', true, 'get')
