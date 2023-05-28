@@ -1097,6 +1097,14 @@ module.exports = {
       type: 2
     })
   },
+  bindOpenidV2: (token, code, appid) => {
+    return request('/user/wxapp/bindOpenid/v2', true, 'post', {
+      token, code, appid
+    })
+  },
+  bindWxmpOpenid: data => {
+    return request('/user/wxmp/bindOpenid', true, 'post', data)
+  },
   encryptedData: (code, encryptedData, iv) => {
     return request('/user/wxapp/decode/encryptedData', true, 'post', {
       code, encryptedData, iv

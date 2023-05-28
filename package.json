@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "3.60.1",
-  "description": "WXAPI.goodsDetail(id, token)",
+  "version": "3.60.2",
+  "description": "bindWxmpOpenid",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
