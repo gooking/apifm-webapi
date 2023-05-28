@@ -644,6 +644,9 @@ module.exports = {
       token
     })
   },
+  orderStatisticsv2: data => {
+    return request('/order/statistics', true, 'get', data);
+  },
   siteStatisticsSaleroom: (data) => {
     return request('/site/statistics/saleroom', true, 'get', data)
   },
