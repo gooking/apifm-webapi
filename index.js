@@ -577,6 +577,11 @@ module.exports = {
       token
     })
   },
+  userDetailSpreadUser: (token, uid) => {
+    return request('/user/detail/spreadUser', true, 'get', {
+      token, uid
+    })
+  },
   userWxinfo: (token) => {
     return request('/user/wxinfo', true, 'get', {
       token
