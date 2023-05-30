@@ -698,6 +698,12 @@ module.exports = {
   cashLogs: (data) => {
     return request('/user/cashLog', true, 'post', data)
   },
+  cashLogsV2: (data) => {
+    return request('/user/cashLog/v2', true, 'post', data)
+  },
+  statisticsComingOut: (data) => {
+    return request('/user/statisticsComingOut', true, 'post', data)
+  },
   payLogs: (data) => {
     return request('/user/payLogs', true, 'post', data)
   },
