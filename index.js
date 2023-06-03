@@ -8,7 +8,6 @@ var timeout = 60000
 
 // 创建axios实例
 const baseRequest = axios.create({
-  baseURL: API_BASE_URL, // api 的 base_url
   timeout: timeout // 请求超时时间
   // headers: { 'X-Custom-Header': 'foobar' }
 })
@@ -57,7 +56,7 @@ baseRequest.interceptors.response.use(
 const request = (url, needSubDomain, method, data) => {
   const _url = (needSubDomain ? '/' + subDomain : '') + url
   return baseRequest({
-    url: _url,
+    url: API_BASE_URL + _url,
     needSubDomain: needSubDomain,
     method: method,
     params: method == 'get' || method == 'GET' ? data : {},

@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "3.60.5",
-  "description": "cashLogsV2",
+  "version": "3.60.6",
+  "description": "init2 方法无效的bug",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
