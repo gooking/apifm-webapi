@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "3.60.6",
-  "description": "init2 方法无效的bug",
+  "version": "3.60.7",
+  "description": "增加regionSearch",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

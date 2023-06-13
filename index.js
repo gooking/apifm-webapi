@@ -694,6 +694,9 @@ module.exports = {
       id
     })
   },
+  regionSearch: data => {
+    return request('/common/region/v2/search', false, 'post', data)
+  },
   cashLogs: (data) => {
     return request('/user/cashLog', true, 'post', data)
   },
@@ -1210,7 +1213,7 @@ module.exports = {
     return request('/user/email/login', true, 'post', data)
   },
   bindEmail: (token, email, code, pwd = '') => {
-    return request('/user/email/bindUsername', true, 'post', {
+    return request('/user/email/bindEmail', true, 'post', {
       token, email, code, pwd
     })
   },
@@ -1276,6 +1279,15 @@ module.exports = {
   },
   wxOpenAuthorization: (data) => {
     return request('/user/wxsns/authorization', true, 'post', data)
+  },
+  wxOpenRegister: (data) => {
+    return request('/user/wxsns/register', true, 'post', data)
+  },
+  wxOpenBindOpenid: (data) => {
+    return request('/user/wxsns/bindOpenid/v2', true, 'post', data)
+  },
+  wxOpenLogin: (data) => {
+    return request('/user/wxsns/login', true, 'post', data)
   },
   userAttentioncheck: (token, uid) => {
     return request('/user/attention/check', true, 'get', {
