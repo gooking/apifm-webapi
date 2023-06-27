@@ -360,6 +360,9 @@ module.exports = {
       id, token
     })
   },
+  goodsDetailV2: data => {
+    return request('/shop/goods/detail', true, 'get', data)
+  },
   goodsLimitations: (goodsId, priceId = '') => {
     return request('/shop/goods/limitation', true, 'get', {
       goodsId, priceId
@@ -977,6 +980,9 @@ module.exports = {
   },
   modifyUserPassword: (token, pwdOld, pwdNew) => {
     return request('/user/modify/password', true, 'post', { token, pwdOld, pwdNew })
+  },
+  modifyUserPasswordByUserName: (data) => {
+    return request('/user/username/modifyPassword', true, 'post', data)
   },
   uniqueId: (type = '') => {
     return request('/uniqueId/get', true, 'get', { type })
