@@ -1239,6 +1239,9 @@ module.exports = {
       token, goodsId, number, sku
     })
   },
+  shippingCarInfoAddItemV2: data => {
+    return request('/shopping-cart/add', true, 'post', data)
+  },
   shippingCarInfoModifyNumber: (token, key, number) => {
     return request('/shopping-cart/modifyNumber', true, 'post', {
       token, key, number
