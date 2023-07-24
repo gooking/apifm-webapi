@@ -337,6 +337,9 @@ module.exports = {
   register_mobile: (data) => {
     return request('/user/m/register', true, 'post', data)
   },
+  bannerTypes: () => {
+    return request('/banner/types', true, 'get')
+  },
   banners: (data) => {
     return request('/banner/list', true, 'get', data)
   },
@@ -683,6 +686,9 @@ module.exports = {
   },
   withDrawLogs: (data) => {
     return request('/user/withDraw/list', true, 'post', data)
+  },
+  withDrawSetting: () => {
+    return request('/user/withDraw/setting', true, 'get')
   },
   province: () => {
     return request('/common/region/v2/province', false, 'get')
@@ -1949,4 +1955,7 @@ module.exports = {
   shopCategoryDetail: (id) => {
     return request('/shopCategory/info', true, 'get', { id })
   },
+  contactList: () => {
+    return request('/contact/list', true, 'get')
+  }
 }
