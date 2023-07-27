@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "3.66.0",
-  "description": "2023-07-24",
+  "version": "3.67.0",
+  "description": "2023-07-27",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

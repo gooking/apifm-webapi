@@ -825,6 +825,9 @@ module.exports = {
   uploadFileList: (path = '') => {
     return request('/dfs/upload/list', true, 'post', { path })
   },
+  uploadFileListV2: data => {
+    return request('/dfs/upload/list/v2', true, 'post', data)
+  },
   galleryList: data => {
     return request('/dfs/gallery', true, 'post', data)
   },
@@ -1294,6 +1297,9 @@ module.exports = {
   },
   gpsDistance: (data) => {
     return request('/common/map/qq/distance', false, 'post', data)
+  },
+  commonIP: (ip) => {
+    return request('/common/ip', false, 'get', { ip })
   },
   peisongfei: () => {
     return request('/fee/peisong/list', true, 'get')
@@ -1845,6 +1851,9 @@ module.exports = {
   commonDays: (startDay = '', days = '') => {
     return request('/common/days', false, 'get', { startDay, days })
   },
+  commonDiffMillis: (d1 = '', d2 = '') => {
+    return request('/common/diffMillis', false, 'get', { d1, d2 })
+  },
   // 支付宝小程序
   aliappUserRegister: data => {
     return request('/user/aliapp/register', true, 'post', data)
@@ -1966,5 +1975,11 @@ module.exports = {
   },
   contactList: () => {
     return request('/contact/list', true, 'get')
-  }
+  },
+  distributedLock: (key, seconds) => {
+    return request('/distributedLock/lock', true, 'get', { key, seconds })
+  },
+  distributedLockRelease: (key) => {
+    return request('/distributedLock/lock', true, 'get', { key })
+  },
 }
