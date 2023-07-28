@@ -1039,6 +1039,12 @@ module.exports = {
   shortUrl: (url = '') => {
     return request('/common/short-url/shorten', false, 'post', { url })
   },
+  shortUrlV2: (content) => {
+    return request('/common/short-url/shorten/v2', false, 'post', { content })
+  },
+  shortUrlExpand: (suffix) => {
+    return request('/common/short-url/expand', false, 'post', { suffix })
+  },
   smsValidateCode: (mobile, key = '', picCode = '') => {
     return request('/verification/sms/get', true, 'get', { mobile, key, picCode })
   },
@@ -1297,6 +1303,9 @@ module.exports = {
   },
   gpsDistance: (data) => {
     return request('/common/map/qq/distance', false, 'post', data)
+  },
+  mockApi: (groupName, apiName, method) => {
+    return request(`/mock/${groupName}/${apiName}`, true, method)
   },
   commonIP: (ip) => {
     return request('/common/ip', false, 'get', { ip })
@@ -1981,5 +1990,20 @@ module.exports = {
   },
   distributedLockRelease: (key) => {
     return request('/distributedLock/lock', true, 'get', { key })
+  },
+  communitySetting: () => {
+    return request('/community/setting', true, 'get')
+  },
+  communityLeaderApply: data => {
+    return request('/communityLeader/apply', true, 'post', data)
+  },
+  communityLeaderApplyInfo: token => {
+    return request('/communityLeader/apply/info', true, 'get', { token })
+  },
+  communityLeaderBuy: token => {
+    return request('/communityLeader/buy', true, 'post', { token })
+  },
+  communityOrderFahuo: data => {
+    return request('/communityOrder/fahuo', true, 'post', data)
   },
 }
