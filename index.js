@@ -1171,6 +1171,9 @@ module.exports = {
   scoreDeductionRules: () => {
     return request('/score/deduction/rules', true, 'get', {})
   },
+  scoreDailyFixedNum: token => {
+    return request('/score/dailyFixedNum', true, 'post', { token })
+  },
   voteItems: (data) => {
     return request('/vote/items', true, 'post', data)
   },
