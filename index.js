@@ -662,6 +662,9 @@ module.exports = {
       token
     })
   },
+  orderPayV2: data => {
+    return request('/order/pay', true, 'post', data)
+  },
   orderHX: (hxNumber) => {
     return request('/order/hx', true, 'post', {
       hxNumber
@@ -968,6 +971,9 @@ module.exports = {
   },
   shopReputationList: (data) => {
     return request('/shop/subshop/listReputation', true, 'post', data)
+  },
+  shopPicList: (data) => {
+    return request('/shop/subshop/shopPics', true, 'post', data)
   },
   shopFavPut: (token, shopId) => {
     return request('/shop/fav/add', true, 'post', { token, shopId })
