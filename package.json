@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "3.68.1",
-  "description": "2023-07-27",
+  "version": "23.11.2",
+  "description": "上传文件接口升级",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
