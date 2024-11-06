@@ -1,6 +1,6 @@
 {
   "name": "apifm-webapi",
-  "version": "24.09.22",
+  "version": "24.11.06",
   "description": "增加stripe支付接口",
   "main": "index.js",
   "scripts": {

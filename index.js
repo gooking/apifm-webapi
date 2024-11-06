@@ -54,12 +54,12 @@ baseRequest.interceptors.response.use(
 )
 
 const request = (url, needSubDomain, method, data) => {
-  let _url = (needSubDomain ? '/' + subDomain : '') + url
+  let _url = API_BASE_URL + (needSubDomain ? '/' + subDomain : '') + url
   if (url.indexOf("http") == 0 ) {
     _url = url
   }
   return baseRequest({
-    url: API_BASE_URL + _url,
+    url: _url,
     needSubDomain: needSubDomain,
     method: method,
     params: method == 'get' || method == 'GET' ? data : {},
