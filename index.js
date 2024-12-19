@@ -330,6 +330,9 @@ module.exports = {
       mobile, pwd, deviceId, deviceName
     })
   },
+  loginMobileV2: data => {
+    return request('/user/m/login', true, 'post', data)
+  },
   loginMobileSmsCode: data => {
     return request('/user/m/loginMobile', true, 'post', data)
   },
@@ -411,6 +414,21 @@ module.exports = {
     return request('/goodsVideoEpisodes/buy', true, 'post', {
       goodsId, number, token
     })
+  },
+  goodsStatistics: data => {
+    return request('/shop/goods/statistics/days', true, 'post', data)
+  },
+  goodsUseless: (data) => {
+    return request('/shop/goods/useful', true, 'post', data)
+  },
+  pushNewGoods: data => {
+    return request('/shop/goods/putOrUpdate', true, 'post', data)
+  },
+  mygoods: data => {
+    return request('/shop/goods/mygoods', true, 'post', data)
+  },
+  deleteMyGoods: (token, id) => {
+    return request('/shop/goods/del', true, 'post', { token, id })
   },
   goodsPrice: (goodsId, propertyChildIds) => {
     return request('/shop/goods/price', true, 'post', {
@@ -2144,6 +2162,18 @@ module.exports = {
   },
   newsExtFieldSet: data => {
     return request('/newsExtField/setField', true, 'post', data)
+  },
+  newsExtFieldInit: data => {
+    return request('https://cms.apifm.com/' + subDomain + '/newsExtField/initFields', true, 'post', data)
+  },
+  newsExtFieldListV2: data => {
+    return request('https://cms.apifm.com/' + subDomain + '/newsExtField/extFields', true, 'get', data)
+  },
+  newsExtFieldDynamicV2: data => {
+    return request('https://cms.apifm.com/' + subDomain + '/newsExtField/dynamic', true, 'get', data)
+  },
+  newsExtFieldSetV2: data => {
+    return request('https://cms.apifm.com/' + subDomain + '/newsExtField/setField', true, 'post', data)
   },
   userAttendantList: data => {
     return request('/user/attendant/list', true, 'post', data)
