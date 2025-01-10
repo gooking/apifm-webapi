@@ -1167,6 +1167,9 @@ module.exports = {
   jsonList: (data) => {
     return request('/json/list', true, 'post', data)
   },
+  jsonListV2: (data) => {
+    return request('/json/list/v2', true, 'post', data)
+  },
   jsonSet: (data) => {
     return request('/json/set', true, 'post', data)
   },
@@ -1486,6 +1489,9 @@ module.exports = {
   },
   commonIP: (ip) => {
     return request('/common/ip', false, 'get', { ip })
+  },
+  commonIPV2: (ip = '') => {
+    return request('https://common.apifm.com/' + subDomain + '/common/ip', false, 'get', { ip })
   },
   peisongfei: () => {
     return request('/fee/peisong/list', true, 'get')
