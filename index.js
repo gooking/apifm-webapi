@@ -446,6 +446,9 @@ module.exports = {
   goodsPriceFreight: (data) => {
     return request('/shop/goods/price/freight', true, 'get', data)
   },
+  goodsPriceMultilevels: (data) => {
+    return request('/shop/goods/priceMultilevels', true, 'get', data)
+  },
   goodsRebate: (token, goodsId) => {
     return request('/shop/goods/rebate', true, 'get', {
       token, goodsId
