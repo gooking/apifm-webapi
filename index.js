@@ -814,6 +814,9 @@ module.exports = {
   regionSearchV2: data => {
     return request('https://common.apifm.com/' + subDomain + '/region/search', false, 'post', data)
   },
+  regionAnalysis: address => {
+    return request('https://common.apifm.com/' + subDomain + '/region/analysis', false, 'post', { address })
+  },
   cashLogs: (data) => {
     return request('/user/cashLog', true, 'post', data)
   },
@@ -1123,6 +1126,9 @@ module.exports = {
   },
   fetchShops: (data) => {
     return request('/shop/subshop/list', true, 'post', data)
+  },
+  fetchShopsV2: (data) => {
+    return request('/shop/subshop/list/v2', true, 'post', data)
   },
   shopSubdetail: (id) => {
     return request('/shop/subshop/detail/v2', true, 'get', { id })
@@ -1472,6 +1478,18 @@ module.exports = {
   yuyueTeamDeleteMember: data => {
     return request('/yuyue/info/team/members/del', true, 'post', data)
   },
+  yuyueFavList: data => {
+    return request('/yuyue/fav/list', true, 'post', data)
+  },
+  yuyueFavAdd: data => {
+    return request('/yuyue/fav/add', true, 'post', data)
+  },
+  yuyueFavDelete: data => {
+    return request('/yuyue/fav/delete', true, 'post', data)
+  },
+  yuyueFavCheck: data => {
+    return request('/yuyue/fav/check', true, 'get', data)
+  },
   register_email: (data) => {
     return request('/user/email/register', true, 'post', data)
   },
@@ -1488,6 +1506,9 @@ module.exports = {
   },
   goodsDynamicV2: data => {
     return request('/site/goods/dynamic', true, 'get', data)
+  },
+  usersDynamic: (type) => {
+    return request('https://common.apifm.com/' + subDomain + '/site/user/dynamic', false, 'get', { type })
   },
   shippingCarInfo: (token) => {
     return request('/shopping-cart/info', true, 'get', {
@@ -1705,6 +1726,24 @@ module.exports = {
   },
   channelDataPull: (key) => {
     return request('/channelData/pull', true, 'get', { key })
+  },
+  bindPartner: (token, partnerId) => {
+    return request('/user/bindPartner', true, 'post', { token, uid: partnerId })
+  },
+  partnerSetting: () => {
+    return request('/partner/setting', true, 'get')
+  },
+  partnerBindTeamLeader: (token, uid) => {
+    return request('/partner/bindTeamLeader', true, 'post', { token, uid })
+  },
+  partnerBuyTeamLeader: token => {
+    return request('/partner/buy', true, 'post', { token })
+  },
+  partnerMembersStatistics: token => {
+    return request('https://common.apifm.com/' + subDomain + '/partner/members/statistics', false, 'get', { token })
+  },
+  partnerMembers: data => {
+    return request('https://common.apifm.com/' + subDomain + '/partner/members', false, 'post', data)
   },
   wxaMpLiveRooms: () => {
     return request('/wx/live/rooms', true, 'get')
