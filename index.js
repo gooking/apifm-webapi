@@ -1232,6 +1232,27 @@ module.exports = {
   jsonDelete: (token = '', id) => {
     return request('/json/delete', true, 'post', { token, id })
   },
+  jsonTop: (token, id, isTop) => {
+    return request('/json/top', true, 'post', { token, id, isTop })
+  },
+  jsonHighlight: (token, id, isHighlight) => {
+    return request('/json/highlight', true, 'post', { token, id, isHighlight })
+  },
+  jsonListV3: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/json/list', true, 'post', data)
+  },
+  jsonSetV2: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/json/set', true, 'post', data)
+  },
+  jsonDeleteV2: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/json/delete', true, 'post', data)
+  },
+  jsonTopv2: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/json/top', true, 'post', data)
+  },
+  jsonHighlightv2: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/json/highlight', true, 'post', data)
+  },
   graphValidateCodeUrl: (key = Math.random()) => {
     const _url = API_BASE_URL + '/' + subDomain + '/verification/pic/get?key=' + key
     return _url
@@ -1872,10 +1893,21 @@ module.exports = {
       queryExts: 'wxintroduction'
     })
   },
+  jdvopGoodsDetailV3: data => {
+    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/v2/detail`, false, 'get', data)
+  },
   jdvopGoodsSkuImages: goodsId => {
-    return request(`/jdvop/${merchantId}/goods/skuImages`, false, 'get', {
+    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/skuImages`, false, 'get', {
       skuId: goodsId
     })
+  },
+  jdvopGoodsSkuImagesV2: goodsId => {
+    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/v2/skuImages`, false, 'get', {
+      skuId: goodsId
+    })
+  },
+  jdVopSkuGoodsSaleRule: skuId => {
+    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/v2/checkSkuSaleList`, false, 'get', { skuId })
   },
   jdvopCartInfo: token => {
     return request(`/jdvop/${merchantId}/shopping-cart/info`, false, 'get', {
