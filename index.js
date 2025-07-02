@@ -1612,6 +1612,9 @@ module.exports = {
   commonIPV2: (ip = '') => {
     return request('https://common.apifm.com/' + subDomain + '/common/ip', false, 'get', { ip })
   },
+  commonIPV3: (ip = '') => {
+    return request('https://common.apifm.com/' + subDomain + '/common/ip/v2', false, 'get', { ip })
+  },
   peisongfei: () => {
     return request('/fee/peisong/list', true, 'get')
   },
