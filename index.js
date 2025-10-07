@@ -669,6 +669,11 @@ module.exports = {
       token
     })
   },
+  userAmountV2: (token) => {
+    return request('https://common.apifm.com/' + subDomain + '/user/amount', false, 'get', {
+      token
+    })
+  },
   orderCreate: (data) => {
     return request('/order/create', true, 'post', data)
   },
@@ -1012,6 +1017,9 @@ module.exports = {
       token,
       orderId
     })
+  },
+  refundApplySetBackLogistics: (data) => {
+    return request('/order/refundApply/setBackLogistics', true, 'post', data)
   },
   cmsCategories: () => {
     return request('/cms/category/list', true, 'get', {})
@@ -1433,6 +1441,9 @@ module.exports = {
   },
   scoreMyStatistics: (data) => {
     return request('/score/myStatistics', true, 'get', data)
+  },
+  expireScorestatistics: (data) => {
+    return request('/score/expireScorestatistics', true, 'post', data)
   },
   voteItems: (data) => {
     return request('/vote/items', true, 'post', data)
