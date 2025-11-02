@@ -1,7 +1,7 @@
 {
   "name": "apifm-webapi",
-  "version": "25.10.16",
-  "description": "商品浏览足迹接口升级",
+  "version": "25.11.2",
+  "description": "课程模块接口升级",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

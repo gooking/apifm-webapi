@@ -747,6 +747,30 @@ module.exports = {
   siteStatisticsSaleroomYear: (year = '') => {
     return request('/site/statistics/saleroom/year', true, 'get', { year })
   },
+  bonusLog: (data) => {
+    return request('/bonusLog/list', true, 'post', data)
+  },
+  bonusLogV2: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/bonusLog/list', true, 'post', data)
+  },
+  mtjAssetV2: (token) => {
+    return request('https://common.apifm.com/' + subDomain + '/mtj/asset', true, 'get', { token })
+  },
+  mtjSettingV2: () => {
+    return request('https://common.apifm.com/' + subDomain + '/mtj/setting', true, 'get')
+  },
+  mtjLogsV2: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/mtj/logs', true, 'post', data)
+  },
+  mtjStatisticsV2: () => {
+    return request('https://common.apifm.com/' + subDomain + '/site/statistics/mjt', true, 'get')
+  },
+  mtjTransferV2: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/mtj/transfer', true, 'post', data)
+  },
+  mtjTransferLogsV2: (data) => {
+    return request('https://common.apifm.com/' + subDomain + '/mtj/transfer/logs', true, 'post', data)
+  },
   orderRefunds: (token, orderId) => {
     return request('/order/refund', true, 'get', {
       token,
@@ -2140,6 +2164,33 @@ module.exports = {
   },
   courseInfoBuyLogDelete: (token, orderId) => {
     return request('/courseBuyLog/del', true, 'post', { token, orderId })
+  },
+  courseInfoListV2: data => {
+    return request('https://common.apifm.com/' + subDomain + '/courseInfo/list', false, 'post', data)
+  },
+  courseInfoV2: id => {
+    return request('https://common.apifm.com/' + subDomain + '/courseInfo/info', false, 'get', { id })
+  },
+  courseBuyLogPublicV2: data => {
+    return request('https://common.apifm.com/' + subDomain + '/courseBuyLog/public', false, 'post', data)
+  },
+  courseBuyLogMyV2: data => {
+    return request('https://common.apifm.com/' + subDomain + '/courseBuyLog/my', false, 'post', data)
+  },
+  courseInfoBuyV2: data => {
+    return request('https://common.apifm.com/' + subDomain + '/courseBuyLog/buy', false, 'post', data)
+  },
+  courseInfoBuyLogPayV2: (token, orderId) => {
+    return request('https://common.apifm.com/' + subDomain + '/courseBuyLog/pay', false, 'post', { token, orderId })
+  },
+  courseInfoBuyLogDetailV2: (token, id, hxNumber = '') => {
+    return request('https://common.apifm.com/' + subDomain + '/courseBuyLog/detail', false, 'get', { token, id, hxNumber })
+  },
+  courseInfoBuyLogCloseV2: (token, orderId) => {
+    return request('https://common.apifm.com/' + subDomain + '/courseBuyLog/close', false, 'post', { token, orderId })
+  },
+  courseInfoBuyLogDeleteV2: (token, orderId) => {
+    return request('https://common.apifm.com/' + subDomain + '/courseBuyLog/del', false, 'post', { token, orderId })
   },
   // 橱窗
   chuchuanSettingInfo: uid => {
