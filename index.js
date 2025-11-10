@@ -1646,6 +1646,12 @@ module.exports = {
       token
     })
   },
+  growthLogsV2: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/growthLog/logs', true, 'post', data)
+  },
+  exchangeScoreToGrowthV2: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/growthLog/exchange', true, 'post', data)
+  },
   qqlogin: (code) => {
     return request('/user/qqconnect/authorization', true, 'get', {
       code
@@ -2354,6 +2360,9 @@ module.exports = {
   },
   aliappQrcode: content => {
     return request('/user/aliapp/qrcode', true, 'post', { content })
+  },
+  aliappMiniappBindMobile: (data) => {
+    return request('/user/aliapp/bindMobile', true, 'post', data)
   },
   // 企业应用 组织/成员/网盘
   organizePrices: () => {
