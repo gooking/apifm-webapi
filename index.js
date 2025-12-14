@@ -130,6 +130,12 @@ module.exports = {
       token
     })
   },
+  scoreExchangeCash: (token, deductionScore) => {
+    return request(COMMON_BASE_URL + subDomain + '/score/exchange/cash', false, 'post', {
+      deductionScore,
+      token
+    })
+  },
   scoreLogs: (data) => {
     return request('/score/logs', true, 'post', data)
   },
@@ -904,7 +910,7 @@ module.exports = {
     return request('/config/vipLevel', true, 'get')
   },
   fxSetting: () => {
-    return request('/saleDistribution/setting', true, 'get')
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/setting', true, 'get')
   },
   fxApply: (token, name, mobile) => {
     return request('/saleDistribution/apply', true, 'post', { token, name, mobile })
@@ -1512,7 +1518,7 @@ module.exports = {
     })
   },
   scoreDeductionRules: () => {
-    return request('/score/deduction/rules', true, 'get', {})
+    return request(COMMON_BASE_URL + subDomain + '/score/deduction/rules', false, 'get', {})
   },
   scoreDailyFixedNum: token => {
     return request('/score/dailyFixedNum', true, 'post', { token })
