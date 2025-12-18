@@ -310,7 +310,7 @@ module.exports = {
     })
   },
   login_tt: (code) => {
-    return request('/user/tt/microapp/login', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/tt/miniapp/login', false, 'post', {
       code
     })
   },
@@ -1461,7 +1461,7 @@ module.exports = {
     return request('/user/delete', true, 'post', { token })
   },
   dynamicUserCode: (token) => {
-    return request('/user/dynamicUserCode', true, 'get', { token })
+    return request(COMMON_BASE_URL + subDomain + '/user/dynamicUserCode', false, 'get', { token })
   },
   userLevelList: (data) => {
     return request('/user/level/list', true, 'post', data)
