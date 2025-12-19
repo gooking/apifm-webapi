@@ -315,7 +315,7 @@ module.exports = {
     })
   },
   login_q: (code) => {
-    return request('/user/q/login', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/q/login', false, 'post', {
       code,
       type: 2
     })
@@ -1679,24 +1679,24 @@ module.exports = {
     })
   },
   growthLogsV2: (data) => {
-    return request(COMMON_BASE_URL + subDomain + '/growthLog/logs', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/growthLog/logs', false, 'post', data)
   },
   exchangeScoreToGrowthV2: (data) => {
-    return request(COMMON_BASE_URL + subDomain + '/growthLog/exchange', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/growthLog/exchange', false, 'post', data)
   },
   qqlogin: (code) => {
-    return request('/user/qqconnect/authorization', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/user/qqconnect/authorization', false, 'get', {
       code
     })
   },
   registerQ: (data) => {
-    return request('/user/q/register', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/q/register', true, 'post', data)
   },
   qqAuthorize: (data) => {
-    return request('/user/q/authorize', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/q/authorize', false, 'post', data)
   },
   qqQrcode: (content) => {
-    return request('/user/q/qrcode', true, 'post', { content })
+    return request(COMMON_BASE_URL + subDomain + '/user/q/qrcode', false, 'post', { content })
   },
   siteStatistics: () => {
     return request('/site/statistics', true, 'get')
