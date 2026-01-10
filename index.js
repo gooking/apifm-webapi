@@ -1295,7 +1295,7 @@ module.exports = {
     return request('/uniqueId/get', true, 'get', { type })
   },
   sequence: (type = '', defValue = '') => {
-    return request('/uniqueId/sequence', true, 'get', { type, defValue })
+    return request(COMMON_BASE_URL + subDomain + '/uniqueId/sequence', false, 'get', { type, defValue })
   },
   queryBarcode: (barcode = '') => {
     return request('/barcode/info', true, 'get', { barcode })
@@ -1705,7 +1705,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/user/q/qrcode', false, 'post', { content })
   },
   siteStatistics: () => {
-    return request('/site/statistics', true, 'get')
+    return request(COMMON_BASE_URL + subDomain + '/site/statistics', false, 'get')
   },
   authorization: (data) => {
     return request('/user/wxmp/auth', true, 'post', data)
