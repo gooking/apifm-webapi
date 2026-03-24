@@ -1723,6 +1723,21 @@ module.exports = {
   mockApi: (groupName, apiName, method) => {
     return request(`/mock/${groupName}/${apiName}`, true, method)
   },
+  tourJourneyList: (type, refId) => {
+    return request('/tourJourney/list', true, 'get', { type, refId })
+  },
+  userBankSelectBanks: () => {
+    return request('/userBank/banks', true, 'get')
+  },
+  userBankInfo: token => {
+    return request(COMMON_BASE_URL + subDomain + '/userBank/info', false, 'get', { token })
+  },
+  userBankBind: data => {
+    return request(COMMON_BASE_URL + subDomain + '/userBank/bind', false, 'post', data)
+  },
+  userBankUnBind: token => {
+    return request(COMMON_BASE_URL + subDomain + '/userBank/unbind', false, 'post', { token })
+  },
   commonIP: (ip) => {
     return request('/common/ip', false, 'get', { ip })
   },
@@ -2844,5 +2859,8 @@ module.exports = {
   },
   fsmRepairUpload: data => {
     return request(COMMON_BASE_URL + subDomain + '/fsmRepair/upload', false, 'post', data)
+  },
+  fsmRepairReturnFactory: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/fsmRepair/returnFactory', false, 'post', data)
   },
 }
