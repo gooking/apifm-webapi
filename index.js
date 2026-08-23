@@ -1995,6 +1995,12 @@ module.exports = {
   partnerWithdrawalLogRefuse: data => {
     return request(COMMON_BASE_URL + subDomain + '/partner/withdrawalLog/refuse', false, 'post', data)
   },
+  liveRoomOnlineUsers: (token, roomId) => {
+    return request('/websocket/rest/liveRoom/onlines', false, 'get', { token, roomId })
+  },
+  liveRoomKickOutUser: (token, roomId, uid) => {
+    return request('/websocket/rest/liveRoom/kickOut', false, 'post', { token, roomId, uid })
+  },
   wxaMpLiveRooms: () => {
     return request(COMMON_BASE_URL + subDomain + '/wx/live/rooms', false, 'get')
   },
@@ -2652,7 +2658,7 @@ module.exports = {
     return request('/shopCategory/info', true, 'get', { id })
   },
   contactList: () => {
-    return request('/contact/list', true, 'get')
+    return request(COMMON_BASE_URL + subDomain + '/contact/list', false, 'get')
   },
   distributedLock: (key, seconds) => {
     return request('/distributedLock/lock', true, 'get', { key, seconds })
