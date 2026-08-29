@@ -236,13 +236,13 @@ module.exports = {
     return request('/pay/wx/requestMerchantTransfer', true, 'get', data);
   },
   wxpayFOMO: (data) => {
-    return request('/pay/fomo/wxapp', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/pay/fomo/wxapp', false, 'post', data)
   },
   payNow: (data) => {
-    return request('/pay/fomo/payNow', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/pay/fomo/payNow', false, 'post', data)
   },
   fomoCheckout: (data) => {
-    return request('/pay/fomo/checkout', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/pay/fomo/checkout', false, 'post', data)
   },
   wxpayFWS: (data) => {
     return request('/pay/wxfws/wxapp', true, 'post', data)
@@ -335,10 +335,10 @@ module.exports = {
     return request('/user/wxapp/getMobile', true, 'get', { code })
   },
   login_username: (data) => {
-    return request('/user/username/login', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/username/login', false, 'post', data)
   },
   bindUsername: (token, username, pwd = '') => {
-    return request('/user/username/bindUsername', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/username/bindUsername', false, 'post', {
       token, username, pwd
     })
   },
@@ -373,7 +373,7 @@ module.exports = {
     return request('/user/wxapp/register/simple', true, 'post', data)
   },
   register_username: (data) => {
-    return request('/user/username/register', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/username/register', false, 'post', data)
   },
   register_mobile: (data) => {
     return request('/user/m/register', true, 'post', data)
@@ -1318,7 +1318,7 @@ module.exports = {
     return request('/user/modify/password', true, 'post', { token, pwdOld, pwdNew })
   },
   modifyUserPasswordByUserName: (data) => {
-    return request('/user/username/modifyPassword', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/username/modifyPassword', false, 'post', data)
   },
   anonymousUserInfo: (id) => {
     return request('/user/anonymous/info', true, 'get', { id })
