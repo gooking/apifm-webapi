@@ -1085,6 +1085,34 @@ module.exports = {
       })
     })
   },
+  uploadFileV3: (data) => {
+    let uploadUrl = 'https://oss.apifm.com/upload2'
+    if (data.apiUrl) {
+      uploadUrl = data.apiUrl
+    }
+    delete data.apiUrl
+    let formData = new FormData()
+    // 自动遍历data所有key，全部塞进formData
+    Object.entries(data).forEach(([key, value]) => {
+      // 过滤掉 undefined / null，避免传给后端"null"字符串
+      if (value !== undefined && value !== null) {
+        formData.append(key, value)
+      }
+    })
+		let config = {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		}
+    // return axios.post(uploadUrl, formData, config)
+    return new Promise((resolve, reject) => {
+      axios.post(uploadUrl, formData, config).then(res => {
+        resolve(res.data)
+      }).catch(e => {
+        reject(e)
+      })
+    })
+  },
   uploadFileFromUrl: (remoteFileUrl = '', ext = '') => {
     return request('/dfs/upload/url', true, 'post', { remoteFileUrl, ext })
   },
@@ -1330,7 +1358,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/uniqueId/sequence', false, 'get', { type, defValue })
   },
   queryBarcode: (barcode = '') => {
-    return request('/barcode/info', true, 'get', { barcode })
+    return request(COMMON_BASE_URL + subDomain + '/barcode/info', false, 'get', { barcode })
   },
   luckyInfo: (id) => {
     return request(COMMON_BASE_URL + subDomain + '/luckyInfo/info/v2', false, 'get', { id })
@@ -2383,10 +2411,10 @@ module.exports = {
   },
   // 寄存
   jicunGoodsList: data => {
-    return request('/jicunGoods/list', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/jicunGoods/list', false, 'post', data)
   },
   jicunGoodsDetail: data => {
-    return request('/jicunGoods/detail', true, 'get', data)
+    return request(COMMON_BASE_URL + subDomain + '/jicunGoods/detail', false, 'get', data)
   },
   // stripe
   stripeAddCard: function stripeAddCard(data) {
@@ -3199,5 +3227,20 @@ module.exports = {
   },
   yaduoUnbind: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/yaduo/unbind', false, 'post', data)
+  },
+  photoList: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/photo/list', false, 'post', data)
+  },
+  photoBuyLogs: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/photo/buyLogs', false, 'post', data)
+  },
+  photoBuyLogsLogs: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/photo/buyLogs/logs', false, 'get', data)
+  },
+  photoBuy: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/photo/buy', false, 'post', data)
+  },
+  photoPay: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/photo/pay', false, 'post', data)
   },
 }
