@@ -1091,6 +1091,7 @@ module.exports = {
       uploadUrl = data.apiUrl
     }
     delete data.apiUrl
+    data.subDomain = subDomain
     let formData = new FormData()
     // 自动遍历data所有key，全部塞进formData
     Object.entries(data).forEach(([key, value]) => {
