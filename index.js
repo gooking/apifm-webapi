@@ -203,6 +203,11 @@ module.exports = {
       token
     })
   },
+  checkReferrer: (referrer) => {
+    return request('/user/check-referrer', true, 'get', {
+      referrer
+    })
+  },
   addTempleMsgFormid: (token, type, formId) => {
     return request('/template-msg/wxa/formId', true, 'post', {
       token, type, formId
@@ -431,12 +436,12 @@ module.exports = {
     })
   },
   goodsVideoEpisodesList: (goodsId, token = '') => {
-    return request('/goodsVideoEpisodes/list', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/goodsVideoEpisodes/list', false, 'get', {
       goodsId, token
     })
   },
   goodsVideoEpisodesBuy: (goodsId, number, token) => {
-    return request('/goodsVideoEpisodes/buy', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/goodsVideoEpisodes/buy', false, 'post', {
       goodsId, number, token
     })
   },
@@ -444,7 +449,7 @@ module.exports = {
     return request('/shop/goods/statistics/days', true, 'post', data)
   },
   goodsUseless: (data) => {
-    return request('/shop/goods/useful', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/useful', false, 'post', data)
   },
   pushNewGoods: data => {
     return request('/shop/goods/putOrUpdate', true, 'post', data)
@@ -459,6 +464,9 @@ module.exports = {
     return request('/shop/goods/price', true, 'post', {
       goodsId, propertyChildIds
     })
+  },
+  goodsPriceV2: data => {
+    return request('/shop/goods/price', true, 'post', data)
   },
   goodsPriceDaily: (goodsId, priceId = '') => {
     return request(COMMON_BASE_URL + subDomain + '/shop/goods/price/day', false, 'get', {
@@ -530,6 +538,9 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/discounts/detail', false, 'get', {
       id
     })
+  },
+  couponStatistics: (token) => {
+    return request(COMMON_BASE_URL + subDomain + '/discounts/statistics', false, 'get', { token});
   },
   myCoupons: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/discounts/my', false, 'get', data)
@@ -736,6 +747,11 @@ module.exports = {
       token
     })
   },
+  orderMtLocation: id => {
+    return request('/order/mtlocation', true, 'get', {
+      id
+    })
+  },
   orderDelivery: (token, orderId) => {
     return request('/order/delivery', true, 'post', {
       orderId,
@@ -778,10 +794,23 @@ module.exports = {
   orderPayV2: data => {
     return request('/order/pay', true, 'post', data)
   },
+  jdjlOrderPay: (token, _token, couponId = '') => {
+    return request('/jdjl/payOrder', true, 'post', {
+      _token,
+      token,
+      couponId
+    })
+  },
   orderHX: (hxNumber) => {
     return request('/order/hx', true, 'post', {
       hxNumber
     })
+  },
+  orderHXV2: data => {
+    return request('/order/hx', true, 'post', data)
+  },
+  orderSet: () => {
+    return request('/order/set', true, 'get')
   },
   orderStatistics: (token) => {
     return request('/order/statistics', true, 'get', {
@@ -937,6 +966,9 @@ module.exports = {
   },
   payBill: (token, money) => {
     return request('/payBill/pay', true, 'post', { token, money })
+  },
+  payBillV2: (data) => {
+    return request('/payBill/pay', true, 'post', data)
   },
   vipLevel: () => {
     return request('/config/vipLevel', true, 'get')
@@ -1283,6 +1315,9 @@ module.exports = {
   fetchShopsV2: (data) => {
     return request('/shop/subshop/list/v2', true, 'post', data)
   },
+  fetchMyShops: (token) => {
+    return request('/shop/subshop/my', true, 'get', { token })
+  },
   shopSubdetail: (id) => {
     return request('/shop/subshop/detail/v2', true, 'get', { id })
   },
@@ -1521,6 +1556,9 @@ module.exports = {
   userTagCertificate: (data) => {
     return request('/userTag/certificate', true, 'post', data)
   },
+  bindSeller: data => {
+    return request('/user/bindSeller', true, 'post', data)
+  },
   loginout: (token) => {
     return request(COMMON_BASE_URL + subDomain + '/user/loginout', false, 'get', { token })
   },
@@ -1626,6 +1664,11 @@ module.exports = {
       token, voteId,
     })
   },
+  myVoteV2: (token, voteId) => {
+    return request(COMMON_BASE_URL + subDomain + '/vote/vote/info/v2', false, 'get', {
+      token, voteId,
+    })
+  },
   voteLogs: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/vote/vote/list', false, 'post', data)
   },
@@ -1638,11 +1681,17 @@ module.exports = {
   myInviteVoteJoinList: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/vote/myInviteLoinList', false, 'post', data)
   },
+  yuyueItemPublish: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/yuyue/publish', false, 'post', data)
+  },
   yuyueItems: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/yuyue/items', false, 'post', data)
   },
   yuyueItemDetail: (id) => {
     return request(COMMON_BASE_URL + subDomain + '/yuyue/info', false, 'get', { id })
+  },
+  yuyueItemDelete: (token, id) => {
+    return request(COMMON_BASE_URL + subDomain + '/yuyue/del', false, 'post', { token, id })
   },
   yuyueJoin: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/yuyue/join', false, 'post', data)
@@ -1764,6 +1813,11 @@ module.exports = {
       token, key
     })
   },
+  shippingCartSelected: (token, key, selected, type = '') => {
+    return request('/shopping-cart/select', true, 'post', {
+      token, key, selected, type
+    })
+  },
   shippingCarInfoRemoveAll: (token) => {
     return request('/shopping-cart/empty', true, 'post', {
       token
@@ -1805,7 +1859,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + `/mock/${groupName}/${apiName}`, false, method)
   },
   tourJourneyList: (type, refId) => {
-    return request('/tourJourney/list', true, 'get', { type, refId })
+    return request(COMMON_BASE_URL + subDomain + '/tourJourney/list', false, 'get', { type, refId })
   },
   userBankSelectBanks: () => {
     return request(COMMON_BASE_URL + subDomain + '/userBank/banks', false, 'get')
@@ -2063,15 +2117,15 @@ module.exports = {
     return request('/fee/peisong/list', true, 'get')
   },
   peisongMembers: (data) => {
-    return request('/peisong/member/list', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/peisong/member/list', false, 'post', data)
   },
   peisongMemberInfo: (token) => {
-    return request('/peisong/member/info', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/peisong/member/info', false, 'get', {
       token
     })
   },
   peisongMemberChangeWorkStatus: (token) => {
-    return request('/peisong/member/change-work-status', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/peisong/member/change-work-status', false, 'post', {
       token
     })
   },
@@ -2466,37 +2520,37 @@ module.exports = {
   },
   // 朋友圈
   momentsPublish: data => {
-    return request('/user/moments/publish', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/publish', false, 'post', data)
   },
   userMomentsList: data => {
-    return request('/user/moments/list', true, 'get', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/list', false, 'post', data)
   },
   momentsDetail: (token, momentsId) => {
-    return request('/user/moments/detail', true, 'get', { token, momentsId })
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/detail', false, 'get', { token, momentsId })
   },
   momentsDelete: (token, momentsId) => {
-    return request('/user/moments/del', true, 'post', { token, momentsId })
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/del', false, 'post', { token, momentsId })
   },
   momentsDeleteComment: (token, commentId) => {
-    return request('/user/moments/delCommon', true, 'post', { token, commentId })
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/delCommon', false, 'post', { token, commentId })
   },
   momentsLike: (token, momentsId) => {
-    return request('/user/moments/like', true, 'post', { token, momentsId })
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/like', false, 'post', { token, momentsId })
   },
   momentsComment: (token, momentsId, uid = '', content) => {
-    return request('/user/moments/comment', true, 'post', { token, momentsId, uid, content })
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/comment', false, 'post', { token, momentsId, uid, content })
   },
   momentsCommentLogs: data => {
-    return request('/user/moments/logs', true, 'get', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/logs', false, 'post', data)
   },
   momentsLogsRead: (token, logsIds) => {
-    return request('/user/moments/logRead', true, 'post', { token, logsIds })
+    return request(COMMON_BASE_URL + subDomain + '/user/moments/logRead', false, 'post', { token, logsIds })
   },
   bottleMsgPublish: data => {
-    return request('/bottleMsg/publish', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/bottleMsg/publish', false, 'post', data)
   },
   bottleMsgSalvage: token => {
-    return request('/bottleMsg/salvage', true, 'get', { token })
+    return request(COMMON_BASE_URL + subDomain + '/bottleMsg/salvage', false, 'get', { token })
   },
   userInvoiceInfo: token => {
     return request(COMMON_BASE_URL + subDomain + '/userInvoice/info', false, 'get', { token })
@@ -2506,6 +2560,12 @@ module.exports = {
   },
   userInvoiceBind: data => {
     return request(COMMON_BASE_URL + subDomain + '/userInvoice/bind', false, 'post', data)
+  },
+  goodsLendsList: data => {
+    return request(COMMON_BASE_URL + subDomain + '/goodsLends/list', false, 'post', data)
+  },
+  goodsLendsLogs: data => {
+    return request(COMMON_BASE_URL + subDomain + '/goodsLends/logs', false, 'post', data)
   },
   tempDataSet: (key, content) => {
     return request('/tempData/set', true, 'post', { key, content })
@@ -2520,13 +2580,13 @@ module.exports = {
     return request(COMMON_BASE_URL + merchantId + '/tempData/get', false, 'get', { key })
   },
   commonDatetime: () => {
-    return request('/common/datetime', true, 'get')
+    return request(COMMON_BASE_URL + subDomain + '/common/datetime', false, 'get')
   },
   commonDays: (startDay = '', days = '') => {
-    return request('/common/days', false, 'get', { startDay, days })
+    return request(COMMON_BASE_URL + subDomain + '/common/days', false, 'get', { startDay, days })
   },
   commonDiffMillis: (d1 = '', d2 = '') => {
-    return request('/common/diffMillis', false, 'get', { d1, d2 })
+    return request(COMMON_BASE_URL + subDomain + '/common/diffMillis', false, 'get', { d1, d2 })
   },
   // 支付宝小程序
   aliappUserRegister: data => {
@@ -3264,5 +3324,11 @@ module.exports = {
   },
   photoPay: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/photo/pay', false, 'post', data)
+  },
+  tournamentScoreList: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/tournamentScore/list', false, 'post', data)
+  },
+  tournamentScoreLogList: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/tournamentScore/logs', false, 'post', data)
   },
 }
