@@ -157,22 +157,22 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/score/taskSuccess', false, 'post', { token, type })
   },
   kanjiaSet: (goodsId) => {
-    return request('/shop/goods/kanjia/set', true, 'get', { goodsId })
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/set', false, 'get', { goodsId })
   },
   kanjiaJoin: (token, kjid) => {
-    return request('/shop/goods/kanjia/join', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/join', false, 'post', {
       kjid,
       token
     })
   },
   kanjiaDetail: (kjid, joiner) => {
-    return request('/shop/goods/kanjia/info', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/info', false, 'get', {
       kjid,
       joiner
     })
   },
   kanjiaHelp: (token, kjid, joiner, remark = '') => {
-    return request('/shop/goods/kanjia/help', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/help', false, 'post', {
       kjid,
       joinerUser: joiner,
       token,
@@ -180,19 +180,19 @@ module.exports = {
     })
   },
   kanjiaClear: (token, kjid) => {
-    return request('/shop/goods/kanjia/clear', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/clear', false, 'post', {
       kjid,
       token
     })
   },
   kanjiaMyJoinInfo: (token, kjid) => {
-    return request('/shop/goods/kanjia/my', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/my', false, 'get', {
       kjid,
       token
     })
   },
   kanjiaHelpDetail: (token, kjid, joiner) => {
-    return request('/shop/goods/kanjia/myHelp', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/kanjia/myHelp', false, 'get', {
       kjid,
       joinerUser: joiner,
       token
@@ -313,6 +313,12 @@ module.exports = {
     return request('/user/wxapp/login', true, 'post', {
       code,
       type: 2
+    })
+  },
+  loginWxV2: (code, appid) => {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login/v2', false, 'post', {
+      code,
+      appid
     })
   },
   login_tt: (code) => {
@@ -477,7 +483,7 @@ module.exports = {
     return request('/shop/goods/price/freight', true, 'get', data)
   },
   goodsPriceMultilevels: (data) => {
-    return request('/shop/goods/priceMultilevels', true, 'get', data)
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/priceMultilevels', false, 'get', data)
   },
   goodsRebate: (token, goodsId) => {
     return request(COMMON_BASE_URL + subDomain + '/shop/goods/rebate/v2', false, 'get', {
@@ -959,7 +965,7 @@ module.exports = {
     return request('/user/payLogs', true, 'post', data)
   },
   rechargeSendRules: () => {
-    return request('/user/recharge/send/rule', true, 'get')
+    return request(COMMON_BASE_URL + subDomain + '/user/recharge/send/rule', false, 'get')
   },
   payBillDiscounts: () => {
     return request(COMMON_BASE_URL + subDomain + '/payBill/discounts', false, 'get')
@@ -1607,7 +1613,7 @@ module.exports = {
     })
   },
   bindOpenidV2: (token, code, appid) => {
-    return request('/user/wxapp/bindOpenid/v2', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindOpenid/v2', false, 'post', {
       token, code, appid
     })
   },
@@ -2111,7 +2117,7 @@ module.exports = {
     })
   },
   peisonFeeList: () => {
-    return request('/fee/peisong/list', true, 'get')
+    return request(COMMON_BASE_URL + subDomain + '/fee/peisong/list', false, 'get')
   },
   peisongMembers: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/peisong/member/list', false, 'post', data)
@@ -2312,10 +2318,10 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/cpsJdGoods/shotUrl/site', false, 'post', { token, materialUrl, couponUrl })
   },
   cpsJdOrders: data => {
-    return request('/cpsJdOrder/list', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdOrder/list', false, 'post', data)
   },
   cpsJdOrderDetail: (token, id) => {
-    return request('/cpsJdOrder/detail', true, 'get', { token, id })
+    return request(COMMON_BASE_URL + subDomain + '/cpsJdOrder/detail', false, 'get', { token, id })
   },
   cpsPddBeian: token => {
     return request(COMMON_BASE_URL + subDomain + '/cpsPddGoods/beian', false, 'get', { token })
@@ -2762,10 +2768,10 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/user/attendant/useful', false, 'post', data)
   },
   shopCategory: () => {
-    return request('/shopCategory/all', true, 'get')
+    return request(COMMON_BASE_URL + subDomain + '/shopCategory/all', false, 'get')
   },
   shopCategoryDetail: (id) => {
-    return request('/shopCategory/info', true, 'get', { id })
+    return request(COMMON_BASE_URL + subDomain + '/shopCategory/info', false, 'get', { id })
   },
   contactList: () => {
     return request(COMMON_BASE_URL + subDomain + '/contact/list', false, 'get')
@@ -3342,5 +3348,14 @@ module.exports = {
   },
   tournamentScoreLogList: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/tournamentScore/logs', false, 'post', data)
+  },
+  centerUserAddressList: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/centerUserAddress/list', false, 'post', data)
+  },
+  tgBotAuthorize: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/tg/bot/authorize', false, 'post', data)
+  },
+  tgBotPayStar: (data) => {
+    return request(COMMON_BASE_URL + subDomain + '/tg/bot/pay/star', false, 'post', data)
   },
 }
