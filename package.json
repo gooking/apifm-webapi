@@ -1,10 +1,11 @@
 {
   "name": "apifm-webapi",
-  "version": "26.11.10",
+  "version": "26.11.20",
   "description": "接口升级",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:min": "node scripts/build-min.js"
   },
   "dependencies": {
     "axios": "^0.24.0"
@@ -13,5 +14,9 @@
     "云开发,无需投入服务器、无需接口编程、无需开发后台"
   ],
   "author": "gooking",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "qs": "^6.17.1"
+  }
 }

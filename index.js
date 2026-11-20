@@ -4,6 +4,8 @@ const qs = require('qs')
 var API_BASE_URL = 'https://api.it120.cc'
 var COMMON_BASE_URL = 'https://common.apifm.com/'
 var CMS_BASE_URL = 'https://cms.apifm.com/'
+var OSS_BASE_URL = 'https://oss.apifm.com/'
+var JDVOP_BASE_URL = 'https://jdvop.apifm.com/'
 var subDomain = '-'
 var merchantId = '0'
 var timeout = 60000
@@ -310,7 +312,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/pay/sandpay/hmpay/jsapi', false, 'post', data)
   },
   login_wx: (code) => {
-    return request('/user/wxapp/login', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login', false, 'post', {
       code,
       type: 2
     })
@@ -333,17 +335,17 @@ module.exports = {
     })
   },
   loginWxaMobile: (code, encryptedData, iv) => {
-    return request('/user/wxapp/login/mobile', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login/mobile', false, 'post', {
       code,
       encryptedData,
       iv
     })
   },
   loginWxaMobileV2: data => {
-    return request('/user/wxapp/login/mobile', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/login/mobile/v2', false, 'post', data)
   },
   fetchWxaMobile: (code) => {
-    return request('/user/wxapp/getMobile', true, 'get', { code })
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/getMobile', false, 'get', { code })
   },
   login_username: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/user/username/login', false, 'post', data)
@@ -354,18 +356,18 @@ module.exports = {
     })
   },
   login_mobile: (mobile, pwd, deviceId = '', deviceName = '') => {
-    return request('/user/m/login', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/m/login', false, 'post', {
       mobile, pwd, deviceId, deviceName
     })
   },
   loginMobileV2: data => {
-    return request('/user/m/login', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/m/login', false, 'post', data)
   },
   loginMobileSmsCode: data => {
-    return request('/user/m/loginMobile', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/m/loginMobile', false, 'post', data)
   },
   resetPwdUseMobileCode: (mobile, pwd, code) => {
-    return request('/user/m/reset-pwd', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/m/reset-pwd', false, 'post', {
       mobile, pwd, code
     })
   },
@@ -378,16 +380,16 @@ module.exports = {
     return request('/user/wxmp/auth', true, 'post', data)
   },
   register_complex: (data) => {
-    return request('/user/wxapp/register/complex', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/register/complex', false, 'post', data)
   },
   register_simple: (data) => {
-    return request('/user/wxapp/register/simple', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/register/simple', false, 'post', data)
   },
   register_username: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/user/username/register', false, 'post', data)
   },
   register_mobile: (data) => {
-    return request('/user/m/register', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/m/register', false, 'post', data)
   },
   bannerTypes: () => {
     return request(COMMON_BASE_URL + subDomain + '/banner/types', false, 'get')
@@ -432,7 +434,7 @@ module.exports = {
     })
   },
   goodsAddition: (goodsId) => {
-    return request('/shop/goods/goodsAddition', true, 'get', {
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/goodsAddition', false, 'get', {
       goodsId
     })
   },
@@ -480,7 +482,7 @@ module.exports = {
     })
   },
   goodsPriceFreight: (data) => {
-    return request('/shop/goods/price/freight', true, 'get', data)
+    return request(COMMON_BASE_URL + subDomain + '/shop/goods/price/freight', false, 'get', data)
   },
   goodsPriceMultilevels: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/shop/goods/priceMultilevels', false, 'get', data)
@@ -697,12 +699,12 @@ module.exports = {
     })
   },
   bindMobileWxa: (token, encryptedData, iv, pwd = '') => {
-    return request('/user/wxapp/bindMobile', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindMobile', false, 'post', {
       token, encryptedData, iv, pwd
     })
   },
   bindMobileSms: (token, mobile, code, pwd = '') => {
-    return request('/user/m/bind-mobile', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/m/bind-mobile', false, 'post', {
       token, mobile, code, pwd
     })
   },
@@ -998,7 +1000,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/saleDistribution/apply/progress/v2', false, 'get', { token: token });
   },
   fxMembers: (data) => {
-    return request('/saleDistribution/members', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/members', false, 'post', data)
   },
   fxCommisionLog: (data) => {
     return request('/saleDistribution/commision/log', true, 'post', data)
@@ -1028,7 +1030,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/saleDistribution/upgrade', false, 'post', { token })
   },
   fxMembersStatistics: token => {
-    return request('/saleDistribution/members/statistics', true, 'get', { token })
+    return request(COMMON_BASE_URL + subDomain + '/saleDistribution/members/statistics', false, 'get', { token })
   },
   fxMyCommisionStatistics: (token, days) => {
     return request(COMMON_BASE_URL + subDomain + '/saleDistribution/my/commision', false, 'get', { token, days })
@@ -1051,10 +1053,10 @@ module.exports = {
     })
   },
   wxaQrcode: (data) => {
-    return request('https://oss.apifm.com/' + subDomain + '/qrcode/wxa/unlimit', true, 'post', data)
+    return request(OSS_BASE_URL + subDomain + '/qrcode/wxa/unlimit', true, 'post', data)
   },
   commonQrcode: (data) => {
-    return request('https://oss.apifm.com/' + subDomain + '/qrcode/content', true, 'post', data)
+    return request(OSS_BASE_URL + subDomain + '/qrcode/content', true, 'post', data)
   },
   uploadFile: (tempFilePath, expireHours) => {
     const uploadUrl = API_BASE_URL + '/' + subDomain + '/dfs/upload/file'
@@ -1078,7 +1080,7 @@ module.exports = {
     })
   },
   uploadFileV2: (token, tempFilePath, expireHours) => {
-    const uploadUrl = 'https://oss.apifm.com/upload2'
+    const uploadUrl = OSS_BASE_URL + 'upload2'
     let formData = new FormData()
     formData.append("token", token)
     formData.append("subDomain", subDomain)
@@ -1103,7 +1105,7 @@ module.exports = {
   uploadFileV22: (token, tempFilePath, expireHours = '') => {
     return new Promise((resolve, reject) => {
       tt.uploadFile({
-        url: 'https://dfs.apifm.com/upload2',
+        url: OSS_BASE_URL + 'upload2',
         filePath: tempFilePath,
         name: 'upfile',
         formData: {
@@ -1124,7 +1126,7 @@ module.exports = {
     })
   },
   uploadFileV3: (data) => {
-    let uploadUrl = 'https://oss.apifm.com/upload2'
+    let uploadUrl = OSS_BASE_URL + 'upload2'
     if (data.apiUrl) {
       uploadUrl = data.apiUrl
     }
@@ -1156,11 +1158,11 @@ module.exports = {
     return request('/dfs/upload/url', true, 'post', { remoteFileUrl, ext })
   },
   uploadFileFromUrlV2: data => {
-    return request('https://oss.apifm.com/uploadByUrl', false, 'post', { ...data, subDomain })
+    return request(OSS_BASE_URL + 'uploadByUrl', false, 'post', { ...data, subDomain })
   },
   uploadFileFromUrlV22: data => {
     const _data = Object.assign(data, { subDomain })
-    return request('https://dfs.apifm.com/uploadByUrl', false, 'post', _data)
+    return request(OSS_BASE_URL + 'uploadByUrl', false, 'post', _data)
   },
   uploadFileList: (path = '') => {
     return request('/dfs/upload/list', true, 'post', { path })
@@ -1313,22 +1315,22 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/shopArea/detail', false, 'get', { id })
   },
   fetchShopsCities: () => {
-    return request('/shop/subshop/cities', true, 'get')
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/cities', false, 'get')
   },
   fetchShops: (data) => {
-    return request('/shop/subshop/list', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/list', false, 'post', data)
   },
   fetchShopsV2: (data) => {
-    return request('/shop/subshop/list/v2', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/list/v2', false, 'post', data)
   },
   fetchMyShops: (token) => {
-    return request('/shop/subshop/my', true, 'get', { token })
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/my', false, 'get', { token })
   },
   shopSubdetail: (id) => {
-    return request('/shop/subshop/detail/v2', true, 'get', { id })
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/detail/v2', false, 'get', { id })
   },
   shopSubApply: (data) => {
-    return request('/shop/subshop/apply', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/shop/subshop/apply', false, 'post', data)
   },
   pickPoints: (data) => {
     return request(COMMON_BASE_URL + subDomain + '/shop/subshop/pickPoints', false, 'post', data)
@@ -1569,7 +1571,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/userTag/certificate', false, 'post', data)
   },
   bindSeller: data => {
-    return request('/user/bindSeller', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/bindSeller', false, 'post', data)
   },
   loginout: (token) => {
     return request(COMMON_BASE_URL + subDomain + '/user/loginout', false, 'get', { token })
@@ -1613,7 +1615,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/user/message/del', false, 'post', { token, id })
   },
   bindOpenid: (token, code) => {
-    return request('/user/wxapp/bindOpenid', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindOpenid', false, 'post', {
       token, code,
       type: 2
     })
@@ -1624,7 +1626,7 @@ module.exports = {
     })
   },
   bindOpenidV11: data => {
-    return request('/user/wxapp/bindOpenid', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/bindOpenid', false, 'post', data)
   },
   bindWxmpOpenid: data => {
     return request('/user/wxmp/bindOpenid', true, 'post', data)
@@ -1633,7 +1635,7 @@ module.exports = {
     return request('/user/wxmp/openid', true, 'get', { code })
   },
   encryptedData: (code, encryptedData, iv) => {
-    return request('/user/wxapp/decode/encryptedData', true, 'post', {
+    return request(COMMON_BASE_URL + subDomain + '/user/wxapp/decode/encryptedData', false, 'post', {
       code, encryptedData, iv
     })
   },
@@ -1860,6 +1862,9 @@ module.exports = {
   },
   authorization: (data) => {
     return request('/user/wxmp/auth', true, 'post', data)
+  },
+  wxmpLogin: data => {
+    return request('/user/wxmp/login', true, 'post', data)
   },
   jssdkSign: (url) => {
     return request('/wx/jssdk/sign', true, 'post', { url })
@@ -2236,13 +2241,13 @@ module.exports = {
     return request(`/jdvop/${merchantId}/goods/list`, false, 'post', data)
   },
   jdvopGoodsListV3: data => {
-    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/v2/list`, false, 'post', data)
+    return request(`${JDVOP_BASE_URL}jdvop/${merchantId}/goods/v2/list`, false, 'post', data)
   },
   jdvopGoodsCheckCanBuy: data => {
     return request(`/jdvop/${merchantId}/goods/checkCanBuy`, false, 'post', data)
   },
   jdvopGoodsCheckCanBuyV3: data => {
-    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/v2/getSkusAllSaleState`, false, 'post', data)
+    return request(`${JDVOP_BASE_URL}jdvop/${merchantId}/goods/v2/getSkusAllSaleState`, false, 'post', data)
   },
   jdvopGoodsDetail: goodsId => {
     return request(`/jdvop/${merchantId}/goods/detail`, false, 'get', {
@@ -2251,20 +2256,20 @@ module.exports = {
     })
   },
   jdvopGoodsDetailV3: data => {
-    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/v2/detail`, false, 'get', data)
+    return request(`${JDVOP_BASE_URL}jdvop/${merchantId}/goods/v2/detail`, false, 'get', data)
   },
   jdvopGoodsSkuImages: goodsId => {
-    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/skuImages`, false, 'get', {
+    return request(`${JDVOP_BASE_URL}jdvop/${merchantId}/goods/skuImages`, false, 'get', {
       skuId: goodsId
     })
   },
   jdvopGoodsSkuImagesV2: goodsId => {
-    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/v2/skuImages`, false, 'get', {
+    return request(`${JDVOP_BASE_URL}jdvop/${merchantId}/goods/v2/skuImages`, false, 'get', {
       skuId: goodsId
     })
   },
   jdVopSkuGoodsSaleRule: skuId => {
-    return request(`https://jdvop.apifm.com/jdvop/${merchantId}/goods/v2/checkSkuSaleList`, false, 'get', { skuId })
+    return request(`${JDVOP_BASE_URL}jdvop/${merchantId}/goods/v2/checkSkuSaleList`, false, 'get', { skuId })
   },
   jdvopCartInfo: token => {
     return request(`/jdvop/${merchantId}/shopping-cart/info`, false, 'get', {
@@ -2801,7 +2806,7 @@ module.exports = {
     return request(COMMON_BASE_URL + subDomain + '/communityLeader/buy', false, 'post', { token })
   },
   communityOrderFahuo: data => {
-    return request('/communityOrder/fahuo', true, 'post', data)
+    return request(COMMON_BASE_URL + subDomain + '/communityOrder/fahuo', false, 'post', data)
   },
   listingSet: () => {
     return request(COMMON_BASE_URL + subDomain + '/listingSet/info', false, 'get')
@@ -2844,6 +2849,9 @@ module.exports = {
   },
   userAttendantOrderRejectOrder: (token, orderId) => {
     return request('/order/rejectOrder', true, 'post', { token, orderId })
+  },
+  userAttendantOrderSuccess: (token, orderId) => {
+    return request(COMMON_BASE_URL + subDomain + '/order/success', false, 'post', { token, orderId })
   },
   userAttendantOrderServing: (token, orderId) => {
     return request('/order/serving', true, 'post', { token, orderId })
